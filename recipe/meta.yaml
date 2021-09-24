@@ -34,6 +34,7 @@ requirements:
   run:
     - python
     - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
+    - pywin32  # [win]
   run_constrained:
     - __glibc >=2.17  # [linux]
 
