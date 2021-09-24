@@ -122,6 +122,3 @@ Feedstock Maintainers
 * [@m3vaz](https://github.com/m3vaz/)
 * [@mmccarty](https://github.com/mmccarty/)
 
-
-<!-- dummy commit to enable rerendering -->
-
