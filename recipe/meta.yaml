@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.4.0" %}
+{% set version = "11.5.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e1c1bd49919c8646b7d84e3e63f5a0a971b64a69a9c986194d66f17cd26ee006
+  sha256: b84880d02c8bc94c55b7aaf55ee0d49c84d6ce82dd080e002bc7ab1e0361f332
 
 build:
   number: 0
