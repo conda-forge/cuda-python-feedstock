@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.4.0" %}
+{% set version = "11.5.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
@@ -10,11 +10,11 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e1c1bd49919c8646b7d84e3e63f5a0a971b64a69a9c986194d66f17cd26ee006
+  sha256: 50b688ef6b3ccc4e4c26d515bbf46e4411cea64f5ce20e8a67b172c30b48b86f
 
 build:
   number: 0
-  skip: true
+  skip: true  # [py<37 or osx]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
@@ -34,6 +34,7 @@ requirements:
   run:
     - python
     - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
+    - pywin32  # [win]
   run_constrained:
     - __glibc >=2.17  # [linux]
 
