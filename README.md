@@ -3,7 +3,7 @@ About cuda-python
 
 Home: https://github.com/NVIDIA/cuda-python
 
-Package license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+Package license: [LicenseRef-NVIDIA-SOFTWARE-LICENSE](https://github.com/NVIDIA/cuda-python/blob/main/LICENSE)
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-python-feedstock/blob/master/LICENSE.txt)
 
