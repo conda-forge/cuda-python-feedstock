@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.5.0" %}
+{% set version = "11.6.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 50b688ef6b3ccc4e4c26d515bbf46e4411cea64f5ce20e8a67b172c30b48b86f
+  sha256: f7d37f0b93a65ae115af6f6dd3fe20f9a611e9a69b84d54c1a48268fa147a397
 
 build:
-  number: 2
+  number: 0
   skip: true  # [py<37 or osx]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -49,7 +49,7 @@ about:
   license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
   license_file: LICENSE
   license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
-  summary: 'CUDA Python Low-level Bindings'
+  summary: CUDA Python Low-level Bindings
   description: |
     CUDA Python provides a standard set of low-level interfaces,
     providing full coverage of and access to the CUDA host APIs from Python.
