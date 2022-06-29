@@ -18,10 +18,10 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }} [win]
-    - {{ compiler('cxx') }} [win]
-    - {{ compiler('c') }} =11.2 [not win]
-    - {{ compiler('cxx') }} =11.2 [not win]
+    - {{ compiler('c') }}  # [win]
+    - {{ compiler('cxx') }}  # [win]
+    - {{ compiler('c') }} =11.2  # [not win]
+    - {{ compiler('cxx') }} =11.2  # [not win]
     - sysroot_linux-64 2.17  # [linux64]
   host:
     - setuptools
