@@ -15,13 +15,17 @@ source:
 build:
   number: 0
   skip: true  # [py<37 or osx]
+  script:
+    - export CUDA_PATH=$PREFIX  # [linux]
+    - set CUDA_PATH=%PREFIX%  # [win]
+    - {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
     - {{ compiler('c') }}  # [win]
     - {{ compiler('cxx') }}  # [win]
-    - {{ compiler('c') }} =11.2  # [not win]
-    - {{ compiler('cxx') }} =11.2  # [not win]
+    - {{ compiler('c') }} =11.2  # [linux]
+    - {{ compiler('cxx') }} =11.2  # [linux]
     - sysroot_linux-64 2.17  # [linux64]
   host:
     - setuptools
