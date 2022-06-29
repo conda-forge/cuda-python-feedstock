@@ -32,7 +32,7 @@ requirements:
     - cython
     - python
     - pip
-    - cudatoolkit {{ major_version ~ ".*.*" }}
+    - cudatoolkit {{ major_version ~ "." ~ minor_version ~ ".*" }}
   run:
     - python
     - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
