@@ -22,10 +22,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}  # [win]
-    - {{ compiler('cxx') }}  # [win]
-    - {{ compiler('c') }} =11.2  # [linux]
-    - {{ compiler('cxx') }} =11.2  # [linux]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - sysroot_linux-64 2.17  # [linux64]
   host:
     - setuptools
