@@ -15,9 +15,6 @@ source:
 build:
   number: 0
   skip: true  # [py<37 or osx or cuda_compiler_version != "11.7"]
-  script_env:
-    - CUDA_PATH=$PREFIX   # [linux]
-    - CUDA_PATH=%PREFIX%  # [win]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
