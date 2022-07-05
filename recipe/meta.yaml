@@ -14,7 +14,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<37 or osx]
+  skip: true  # [py<37 or osx or cuda_compiler_version != "11.7"]
   script:
     - git clone https://gitlab.com/nvidia/headers/cuda-individual/cudart.git $PREFIX/cuda-headers/include  # [linux]
     - export CUDA_PATH=$PREFIX/cuda-headers  # [linux]
@@ -28,13 +28,13 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}
     - sysroot_linux-64 2.17  # [linux64]
   host:
     - setuptools
     - cython
     - python
     - pip
-    - cudatoolkit {{ major_version ~ "." ~ minor_version ~ ".*" }}
   run:
     - python
     - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
