@@ -16,9 +16,13 @@ build:
   number: 0
   skip: true  # [py<37 or osx]
   script:
-    - export CUDA_PATH=$PREFIX  # [linux]
-    - set CUDA_PATH=%PREFIX%  # [win]
+    - git clone https://gitlab.com/nvidia/headers/cuda-individual/cudart.git $PREFIX/cuda-headers/include  # [linux]
+    - export CUDA_PATH=$PREFIX/cuda-headers  # [linux]
+    - git clone https://gitlab.com/nvidia/headers/cuda-individual/cudart.git %PREFIX%\cuda-headers\include  # [win]
+    - set CUDA_PATH=%PREFIX%/cuda-headers  # [win]
     - {{ PYTHON }} -m pip install . --no-deps -vv
+    - rm -rf $PREFIX/cuda-headers/  # [linux]
+    - rm -rf %PREFIX%\cuda-headers\  # [win]
 
 requirements:
   build:
