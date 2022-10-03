@@ -18,7 +18,7 @@ build:
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
-    - {{ pin_subpackage('cuda-python') }}  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
+    - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
   ignore_run_exports:
     - cudatoolkit
 
