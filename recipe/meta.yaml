@@ -14,7 +14,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<37 or osx or cuda_compiler_version != "11.7"]
+  skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
