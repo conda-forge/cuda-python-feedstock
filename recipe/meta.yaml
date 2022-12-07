@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.7.1" %}
+{% set version = "11.8.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
@@ -10,11 +10,11 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c8e9d769a6066bb5f94bb0362dbc20ed6f6b525336373263aeb6f9c6dc7b91e4
+  sha256: afc4f0ac46c0e734a71f97d52390424aec1bc9fceb324e30095ca09bc678ff72
 
 build:
-  number: 1
-  skip: true  # [py<37 or osx or cuda_compiler_version != "11.7"]
+  number: 0
+  skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
@@ -32,6 +32,7 @@ requirements:
     - setuptools
     - cython
     - python
+    - pyclibrary
     - pip
   run:
     - python
