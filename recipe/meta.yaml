@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.1" %}
+{% set version = "12.1.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
@@ -10,17 +10,20 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ef54ada5d607387f59950cfb3c3852e5816b62824402d289227b8066e8353489
+  sha256: f89f7de4d48b6ecb4792412317131c40c73d8b8710f89eb4eaaeff2f1dc13261
 
 build:
-  number: 2
-  skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
+  number: 0
+  skip: true  # [py<37 or osx or cuda_compiler_version != "12.1"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
+  # TODO: Do we need run_exports in CUDA 12? I think so?
   run_exports:
-    - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
-  ignore_run_exports:
-    - cudatoolkit
+    - cuda-python >=12.1.0
+  # TODO: Do we need to ignore anything in CUDA 12?
+  #ignore_run_exports:
+  #  - cuda-cudart
+  #  - cuda-nvrtc
 
 requirements:
   build:
@@ -36,7 +39,9 @@ requirements:
     - pip
   run:
     - python
-    - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
+    - cuda-version >=12.1
+    - cuda-cudart
+    - cuda-nvrtc
     - pywin32  # [win]
   run_constrained:
     - __glibc >=2.17  # [linux]
