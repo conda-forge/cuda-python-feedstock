@@ -20,9 +20,10 @@ build:
   number: 0
   skip: true  # [py<37 or osx or cuda_compiler_version != "12.0"]
   script:
-    # Ensure that CUDA includes can be found by the host compiler
-    - export CUDA_HOME="${PREFIX}/targets/{{ target_name }}"  # [linux]
     - {{ PYTHON }} -m pip install . --no-deps -vv
+  script_env:
+    # Ensure that CUDA includes can be found by the host compiler
+    - export CUDA_HOME="${PREFIX}/targets/{{ target_name }}"
   run_exports:
     - cuda-python >=12.0.0
   # TODO: Do we need to ignore anything in CUDA 12?
@@ -50,8 +51,6 @@ requirements:
     - cuda-cudart
     - cuda-nvrtc
     - pywin32  # [win]
-  run_constrained:
-    - __glibc >=2.17  # [linux]
 
 test:
   imports:
