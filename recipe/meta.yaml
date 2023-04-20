@@ -1,8 +1,12 @@
 {% set name = "cuda-python" %}
-{% set version = "12.1.0" %}
+{% set version = "12.0.0" %}
 {% set major_version = version.split(".")[0] %}
 {% set minor_version = version.split(".")[1] %}
 {% set patch_version = version.split(".")[2] %}
+{% set target_name = "x86_64-linux" %}  # [linux64]
+{% set target_name = "ppc64le-linux" %}  # [ppc64le]
+{% set target_name = "sbsa-linux" %}  # [aarch64]
+{% set target_name = "x64" %}  # [win]
 
 package:
   name: {{ name|lower }}
@@ -10,16 +14,17 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f89f7de4d48b6ecb4792412317131c40c73d8b8710f89eb4eaaeff2f1dc13261
+  sha256: 7df0f84c4b6210112353374a7d992bfd5bba9c97358b39ea03b61bd634ce9c8a
 
 build:
   number: 0
-  skip: true  # [py<37 or osx or cuda_compiler_version != "12.1"]
+  skip: true  # [py<37 or osx or cuda_compiler_version != "12.0"]
   script:
+    # Ensure that CUDA includes can be found by the host compiler
+    - export CFLAGS="$CFLAGS -I$PREFIX/targets/{{ target_name }}/include"  # [linux]
     - {{ PYTHON }} -m pip install . --no-deps -vv
-  # TODO: Do we need run_exports in CUDA 12? I think so?
   run_exports:
-    - cuda-python >=12.1.0
+    - cuda-python >=12.0.0
   # TODO: Do we need to ignore anything in CUDA 12?
   #ignore_run_exports:
   #  - cuda-cudart
@@ -30,16 +35,16 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
-    - sysroot_linux-64 2.17  # [linux64]
+    - sysroot_{{ target_platform }} 2.17  # [linux]
   host:
-    - setuptools
     - cython
-    - python
-    - pyclibrary
     - pip
+    - pyclibrary
+    - python
+    - setuptools
   run:
     - python
-    - cuda-version >=12.1
+    - cuda-version >=12.0
     - cuda-cudart
     - cuda-nvrtc
     - pywin32  # [win]
