@@ -42,6 +42,7 @@ requirements:
   host:
     - cuda-cudart-dev
     - cuda-nvrtc-dev
+    - cuda-profiler-api
     - cython
     - pip
     - pyclibrary
