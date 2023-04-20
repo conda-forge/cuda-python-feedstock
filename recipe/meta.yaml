@@ -21,7 +21,7 @@ build:
   skip: true  # [py<37 or osx or cuda_compiler_version != "12.0"]
   script:
     # Ensure that CUDA includes can be found by the host compiler
-    - export CFLAGS="$CFLAGS -I$PREFIX/targets/{{ target_name }}/include"  # [linux]
+    - export CUDA_HOME="$CFLAGS -I$PREFIX/targets/{{ target_name }}"  # [linux]
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
     - cuda-python >=12.0.0
