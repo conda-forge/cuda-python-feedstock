@@ -25,7 +25,7 @@ build:
     # Ensure that CUDA includes can be found by the host compiler
     - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
   run_exports:
-    - cuda-python >=12.0.0
+    - cuda-python >={{ version }}
   ignore_run_exports:
     - {{ compiler('cuda') }}
 
@@ -52,7 +52,7 @@ requirements:
     - setuptools
   run:
     - python
-    - cuda-version >=12.0
+    - cuda-version >={{ major_version ~ ".0" }}
     - pywin32  # [win]
 
 test:
