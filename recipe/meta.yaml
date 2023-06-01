@@ -23,7 +23,7 @@ build:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
-    - export CUDA_HOME="${PREFIX}/targets/{{ target_name }}"
+    - export CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
   run_exports:
     - cuda-python >=12.0.0
   # TODO: Do we need to ignore anything in CUDA 12?
@@ -35,17 +35,11 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # Change back to compiler('cuda') after merging https://github.com/conda-forge/cuda-nvcc-feedstock/pull/3
-    #- {{ compiler('cuda') }}
-    - cuda-nvcc
-    - sysroot_{{ target_platform }} 2.17  # [linux]
-  host:
-    - cuda-cudart-dev
-    # cuda-nvcc is needed in host so that the nvcc compiler's crt/ headers are
-    # available for gcc (doesn't require nvcc at all).
-    - cuda-nvcc
+    - {{ compiler('cuda') }}
     - cuda-nvrtc-dev
     - cuda-profiler-api
+    - sysroot_{{ target_platform }} 2.17  # [linux]
+  host:
     - cython
     - pip
     - pyclibrary
