@@ -1,11 +1,11 @@
-About cuda-python
-=================
+About cuda-python-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-python-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/NVIDIA/cuda-python
 
 Package license: [LicenseRef-NVIDIA-SOFTWARE-LICENSE](https://github.com/NVIDIA/cuda-python/blob/main/LICENSE)
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-python-feedstock/blob/main/LICENSE.txt)
 
 Summary: CUDA Python Low-level Bindings
 
