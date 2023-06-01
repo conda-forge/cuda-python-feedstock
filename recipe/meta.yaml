@@ -32,6 +32,10 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
+    # The packages with CUDA headers need to be added to "build" so that
+    # cuda-python can find and parse the headers. The parsing code in
+    # cuda-python doesn't support splayed layouts, i.e. packages split between
+    # "build" and "host", because $CUDA_HOME can only point to build or host.
     - cuda-nvrtc-dev
     - cuda-profiler-api
     - sysroot_{{ target_platform }} 2.17  # [linux]
