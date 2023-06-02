@@ -25,7 +25,7 @@ build:
     # Ensure that CUDA includes can be found by the host compiler
     - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
   run_exports:
-    - cuda-python >={{ version }}
+    - cuda-python >={{ major_version ~ ".0" }}
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
