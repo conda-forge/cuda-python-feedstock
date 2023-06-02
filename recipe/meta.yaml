@@ -38,7 +38,9 @@ requirements:
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
-    - cudatoolkit  # [(cuda_compiler_version or "").startswith("11")]
+    {% if major < 12 %}
+    - cudatoolkit
+    {% endif %}
     - pywin32  # [win]
 
 test:
