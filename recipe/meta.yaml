@@ -29,7 +29,7 @@ build:
     # Ensure that CUDA includes can be found by the host compiler
     - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
   run_exports:
-    - {{ pin_compatible('cuda-python', min_pin='x', max_pin='x') }}
+    - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
