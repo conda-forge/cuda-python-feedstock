@@ -1,8 +1,8 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.1" %}
-{% set major_version = version.split(".")[0] %}
-{% set minor_version = version.split(".")[1] %}
-{% set patch_version = version.split(".")[2] %}
+{% set version = "11.8.2" %}
+{% set major_version = version.split(".")[0]|int %}
+{% set minor_version = version.split(".")[1]|int %}
+{% set patch_version = version.split(".")[2]|int %}
 
 package:
   name: {{ name|lower }}
@@ -10,36 +10,36 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ef54ada5d607387f59950cfb3c3852e5816b62824402d289227b8066e8353489
+  sha256: bfb36d314065b695decd23935ab008630cc956cbcd428d520106568fdeb7e644
 
 build:
-  number: 2
+  number: 0
   skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
     - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
-  ignore_run_exports:
-    - cudatoolkit
+  ignore_run_exports_from:
+    - {{ compiler('cuda') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
-    - sysroot_linux-64 2.17  # [linux64]
+    - sysroot_{{ target_platform }} 2.17  # [linux]
   host:
     - setuptools
     - cython
     - python
     - pyclibrary
     - pip
+    - cuda-version {{ major_version }}
   run:
     - python
-    - {{ pin_compatible('cudatoolkit', min_pin='x', max_pin='x') }}
+    - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
+    - cudatoolkit
     - pywin32  # [win]
-  run_constrained:
-    - __glibc >=2.17  # [linux]
 
 test:
   imports:
