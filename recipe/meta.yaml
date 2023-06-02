@@ -1,8 +1,12 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.2" %}
+{% set version = "12.0.0" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
+{% set target_name = "x86_64-linux" %}  # [linux64]
+{% set target_name = "ppc64le-linux" %}  # [ppc64le]
+{% set target_name = "sbsa-linux" %}  # [aarch64]
+{% set target_name = "x64" %}  # [win]
 
 package:
   name: {{ name|lower }}
@@ -10,15 +14,22 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: bfb36d314065b695decd23935ab008630cc956cbcd428d520106568fdeb7e644
+  sha256: 7df0f84c4b6210112353374a7d992bfd5bba9c97358b39ea03b61bd634ce9c8a
 
 build:
   number: 0
-  skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
+  # TODO: Add `linux_aarch64`, `linux_ppc64le`, and `win_64` once supported on CUDA 12 in conda-forge.
+  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/36
+  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/37
+  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/38
+  skip: true  # [aarch64 or ppc64le or win or osx or cuda_compiler_version != "12.0"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
+  script_env:
+    # Ensure that CUDA includes can be found by the host compiler
+    - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
   run_exports:
-    - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
+    - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
@@ -27,18 +38,26 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
+    # The packages with CUDA headers need to be added to "build" so that
+    # cuda-python can find and parse the headers. The parsing code in
+    # cuda-python doesn't support splayed layouts, i.e. packages split between
+    # "build" and "host", because $CUDA_HOME can only point to build or host.
+    - cuda-nvrtc-dev
+    - cuda-profiler-api
     - sysroot_{{ target_platform }} 2.17  # [linux]
   host:
-    - setuptools
+    - cuda-cudart-dev
+    - cuda-nvrtc-dev
+    - cuda-profiler-api
     - cython
-    - python
-    - pyclibrary
     - pip
+    - pyclibrary
+    - python
+    - setuptools
     - cuda-version {{ major_version }}
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
-    - cudatoolkit
     - pywin32  # [win]
 
 test:
