@@ -17,12 +17,12 @@ source:
   sha256: 7df0f84c4b6210112353374a7d992bfd5bba9c97358b39ea03b61bd634ce9c8a
 
 build:
-  number: 0
+  number: 1
   # TODO: Add `linux_aarch64`, `linux_ppc64le`, and `win_64` once supported on CUDA 12 in conda-forge.
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/36
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/37
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/38
-  skip: true  # [aarch64 or ppc64le or win or osx or cuda_compiler_version != "12.0"]
+  skip: true  # [win or osx or cuda_compiler_version != "12.0"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
