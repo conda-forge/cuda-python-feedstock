@@ -37,3 +37,5 @@ zip_keys:
   - cuda_compiler_version
   - cdt_name
   - docker_image
+- - python
+  - channel_sources
