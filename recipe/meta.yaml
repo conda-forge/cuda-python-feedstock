@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "12.0.0" %}
+{% set version = "12.3.0" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
@@ -14,10 +14,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 7df0f84c4b6210112353374a7d992bfd5bba9c97358b39ea03b61bd634ce9c8a
+  sha256: 42d54f7ed7231cec1153b1055e7995a936a6f1e67940d7f012474a67adc88819
 
 build:
-  number: 2
+  number: 0
   # TODO: Add `linux_aarch64`, `linux_ppc64le`, and `win_64` once supported on CUDA 12 in conda-forge.
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/36
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/37
