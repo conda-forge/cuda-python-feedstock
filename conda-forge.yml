@@ -1,3 +1,6 @@
+bot:
+  abi_migration_branches:
+    - 11.8
 conda_build:
   pkg_format: '2'
 conda_forge_output_validation: true
