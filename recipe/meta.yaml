@@ -18,16 +18,13 @@ source:
 
 build:
   number: 2
-  # TODO: Add `linux_aarch64`, `linux_ppc64le`, and `win_64` once supported on CUDA 12 in conda-forge.
-  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/36
-  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/37
-  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/38
   skip: true  # [osx or cuda_compiler_version != "12.0"]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
-    - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"
+    - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"  # [not win64]
+    - CUDA_HOME="%BUILD_PREFIX%\Library"                     # [win64]
   run_exports:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
