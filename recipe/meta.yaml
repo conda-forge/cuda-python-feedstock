@@ -46,7 +46,7 @@ requirements:
     - cuda-cudart-dev
     - cuda-nvrtc-dev
     - cuda-profiler-api
-    - cython
+    - cython <3
     - pip
     - pyclibrary
     - python
