@@ -18,7 +18,7 @@ source:
 
 build:
   number: 2
-  skip: true  # [osx or cuda_compiler_version != "12.0"]
+  skip: true  # [osx or cuda_compiler_version != "12.0" or py == 312]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
