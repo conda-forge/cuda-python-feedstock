@@ -17,13 +17,15 @@ source:
   sha256: 7df0f84c4b6210112353374a7d992bfd5bba9c97358b39ea03b61bd634ce9c8a
 
 build:
-  number: 2
+  number: 3
+  # Cython 0.29.x seems not to be fully compatible with Python 3.12, skipping for now.
+  # This can be removed in a later CUDA Python that supports Cython 3.x.
   skip: true  # [osx or cuda_compiler_version != "12.0" or py == 312]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
-    - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"  # [not win64]
+    - CUDA_HOME="${BUILD_PREFIX}/targets/{{ target_name }}"  # [linux]
     - CUDA_HOME=%BUILD_PREFIX%\Library                       # [win64]
   run_exports:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
