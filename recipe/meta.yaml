@@ -26,6 +26,7 @@ build:
   skip: true
   {% endif %}
   script:
+    - set "INCLUDE=%INCLUDE%;%BUILD_PREFIX%\Library\include"  # [win64]
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
