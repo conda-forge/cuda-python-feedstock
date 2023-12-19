@@ -22,7 +22,9 @@ build:
   # This can be removed in a later CUDA Python that supports Cython 3.x.
   # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/57
   skip: true  # [py == 312]
-  skip: true  # [cuda_compiler_version != "12.1"]
+  {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
+  skip: true
+  {% endif %}
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
@@ -39,7 +41,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
-    - cuda-version {{ major_version }}
+    - cuda-version {{ major_version }}.{{ minor_version }}
     # The packages with CUDA headers need to be added to "build" so that
     # cuda-python can find and parse the headers. The parsing code in
     # cuda-python doesn't support splayed layouts, i.e. packages split between
@@ -56,7 +58,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
-    - cuda-version {{ major_version }}
+    - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
