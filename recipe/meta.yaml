@@ -38,6 +38,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
+    - cuda-version {{ major_version }}
     # The packages with CUDA headers need to be added to "build" so that
     # cuda-python can find and parse the headers. The parsing code in
     # cuda-python doesn't support splayed layouts, i.e. packages split between
