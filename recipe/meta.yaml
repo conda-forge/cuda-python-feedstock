@@ -82,6 +82,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - bdice
     - m3vaz
     - jakirkham
     - mmccarty
