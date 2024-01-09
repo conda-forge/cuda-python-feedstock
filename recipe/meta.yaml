@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "12.2.0" %}
+{% set version = "12.2.1" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
@@ -14,19 +14,16 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 89ed348f0e4165f89d50675b4978b2a9d4d7449be5ab54074c187ef6b210993c
+  sha256: eb4098d2dffaac2f232f5eeb8759e81b8d0d0efe31fc3466555ca935db57b3a9
 
 build:
   number: 0
-  # Cython 0.29.x seems not to be fully compatible with Python 3.12, skipping for now.
-  # This can be removed in a later CUDA Python that supports Cython 3.x.
-  # xref: https://github.com/conda-forge/cuda-python-feedstock/issues/57
-  skip: true  # [py == 312]
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
   script:
     - set "INCLUDE=%INCLUDE%;%BUILD_PREFIX%\Library\include"  # [win64]
+    - {{ PYTHON }} setup.py build_ext --inplace -j1
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
@@ -46,12 +43,12 @@ requirements:
     - sysroot_{{ target_platform }} 2.17  # [linux]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
-    - cython <3                           # [build_platform != target_platform]
+    - cython                              # [build_platform != target_platform]
   host:
     - cuda-cudart-dev
     - cuda-nvrtc-dev
     - cuda-profiler-api
-    - cython <3
+    - cython
     - pip
     - pyclibrary
     - python
