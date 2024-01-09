@@ -23,7 +23,7 @@ build:
   {% endif %}
   script:
     - set "INCLUDE=%INCLUDE%;%BUILD_PREFIX%\Library\include"  # [win64]
-    - {{ PYTHON }} setup.py build_ext -j{{ CPU_COUNT }}
+    - {{ PYTHON }} setup.py build_ext -j1
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
