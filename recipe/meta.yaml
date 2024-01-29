@@ -53,6 +53,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
+    - tomli  # [py<311]
     - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
