@@ -33,6 +33,8 @@ build:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
+    - cuda-cudart-dev
+    - cuda-nvrtc-dev
 
 requirements:
   build:
