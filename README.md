@@ -308,4 +308,5 @@ Feedstock Maintainers
 * [@leofang](https://github.com/leofang/)
 * [@m3vaz](https://github.com/m3vaz/)
 * [@mmccarty](https://github.com/mmccarty/)
+* [@vyasr](https://github.com/vyasr/)
 
