@@ -50,8 +50,8 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
-    - cuda-cudart-dev    # cuda-cudart run-export is ignored, see above
-    - cuda-nvrtc-dev     # cuda-nvrtc run-export is ignored, see above
+    - cuda-cudart-dev
+    - cuda-nvrtc-dev
     - cuda-profiler-api
     - cython
     - pip
@@ -62,14 +62,16 @@ requirements:
     - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
-    # cuda-python requires cuda-nvrtc from the same major version.
+    # cuda-python requires cuda-nvrtc from the same major version. We ignored
+    # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
     - cuda-nvrtc >={{ major_version }},<{{ major_version+1 }}.0a0
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - pywin32  # [win]
   run_constrained:
     # cuda-cudart is not a hard dependency because cuda-python re-implements
     # cudart. This package is optionally dlopen'd for getting the local cudart
-    # version with cuda.cudart.getLocalRuntimeVersion().
+    # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
+    # of cuda-cudart-dev and instead allow a looser pinning here.
     - cuda-cudart >={{ major_version }},<{{ major_version+1 }}.0a0
 
 test:
