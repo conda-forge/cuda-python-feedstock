@@ -95,7 +95,8 @@ about:
 extra:
   recipe-maintainers:
     - bdice
-    - m3vaz
     - jakirkham
-    - mmccarty
     - leofang
+    - m3vaz
+    - mmccarty
+    - vyasr
