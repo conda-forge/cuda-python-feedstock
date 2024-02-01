@@ -17,7 +17,7 @@ source:
   sha256: 3ed4d6ce76dd6cc03280cedbee536452d3c45c5e371984146760f55f6290fbd7
 
 build:
-  number: 0
+  number: 1
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
@@ -33,6 +33,11 @@ build:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
+    # The run-exports from these dev packages are too tight, so we ignore them.
+    # The cuda-python package supports CUDA Enhanced Compatibility through its
+    # use of dlopen, so it is compatible with other CUDA minor versions.
+    - cuda-cudart-dev
+    - cuda-nvrtc-dev
 
 requirements:
   build:
@@ -57,8 +62,17 @@ requirements:
     - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
+    # cuda-python requires cuda-nvrtc from the same major version. We ignored
+    # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
+    - cuda-nvrtc >={{ major_version }},<{{ major_version+1 }}.0a0
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - pywin32  # [win]
+  run_constrained:
+    # cuda-cudart is not a hard dependency because cuda-python re-implements
+    # cudart. This package is optionally dlopen'd for getting the local cudart
+    # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
+    # of cuda-cudart-dev and instead allow a looser pinning here.
+    - cuda-cudart >={{ major_version }},<{{ major_version+1 }}.0a0
 
 test:
   imports:
@@ -81,7 +95,8 @@ about:
 extra:
   recipe-maintainers:
     - bdice
-    - m3vaz
     - jakirkham
-    - mmccarty
     - leofang
+    - m3vaz
+    - mmccarty
+    - vyasr
