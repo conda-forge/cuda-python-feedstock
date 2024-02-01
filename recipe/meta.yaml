@@ -59,6 +59,8 @@ requirements:
     - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
+    - cuda-cudart
+    - cuda-nvrtc
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - pywin32  # [win]
 
