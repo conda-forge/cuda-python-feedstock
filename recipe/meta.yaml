@@ -22,7 +22,6 @@ build:
   skip: true
   {% endif %}
   script:
-    - {{ PYTHON }} setup.py build_ext --inplace -j1
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
