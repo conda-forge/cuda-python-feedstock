@@ -17,7 +17,7 @@ source:
   sha256: 3ed4d6ce76dd6cc03280cedbee536452d3c45c5e371984146760f55f6290fbd7
 
 build:
-  number: 2
+  number: 3
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
