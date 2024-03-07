@@ -17,13 +17,11 @@ source:
   sha256: ba983dbb91a7f51553315fe14f1fbcbb4920f8f2e9bb47620735d2d63c33e673
 
 build:
-  number: 0
+  number: 1
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
   script:
-    - set "INCLUDE=%INCLUDE%;%BUILD_PREFIX%\Library\include"  # [win64]
-    - {{ PYTHON }} setup.py build_ext --inplace -j1
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
@@ -36,6 +34,7 @@ build:
     # The run-exports from these dev packages are too tight, so we ignore them.
     # The cuda-python package supports CUDA Enhanced Compatibility through its
     # use of dlopen, so it is compatible with other CUDA minor versions.
+    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-nvrtc-dev
 
@@ -50,6 +49,7 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
+    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-cudart
     - cuda-nvrtc-dev
