@@ -2,7 +2,7 @@ azure:
   free_disk_space: true
 bot:
   abi_migration_branches:
-    - 11.8
+    - "11.8"
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
