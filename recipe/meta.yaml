@@ -17,7 +17,7 @@ source:
   sha256: ba983dbb91a7f51553315fe14f1fbcbb4920f8f2e9bb47620735d2d63c33e673
 
 build:
-  number: 1
+  number: 2
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
@@ -43,8 +43,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
+    - {{ stdlib('c') }}
     - cuda-version {{ major_version }}.{{ minor_version }}
-    - sysroot_{{ target_platform }} 2.17  # [linux]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
