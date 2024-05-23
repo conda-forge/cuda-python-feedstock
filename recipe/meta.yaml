@@ -1,10 +1,9 @@
 {% set name = "cuda-python" %}
-{% set version = "12.4.0" %}
+{% set version = "12.5.0" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
 {% set target_name = "x86_64-linux" %}  # [linux64]
-{% set target_name = "ppc64le-linux" %}  # [ppc64le]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
 {% set target_name = "x64" %}  # [win]
 
@@ -14,13 +13,17 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ba983dbb91a7f51553315fe14f1fbcbb4920f8f2e9bb47620735d2d63c33e673
+  sha256: ee7e3df43da7d924207e03efa4d5e5466801510b3e1f0377d425c6e6a8d823bb
 
 build:
-  number: 2
+  number: 0
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
+  # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
+  # So skip building `cuda-python` on `linux_ppc64le`
+  # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
+  skip: true  # [ppc64le]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
