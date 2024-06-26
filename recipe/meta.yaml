@@ -38,7 +38,6 @@ build:
     # The run-exports from these dev packages are too tight, so we ignore them.
     # The cuda-python package supports CUDA Enhanced Compatibility through its
     # use of dlopen, so it is compatible with other CUDA minor versions.
-    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-nvrtc-dev
 
@@ -53,7 +52,6 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
-    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-cudart
     - cuda-nvrtc-dev
