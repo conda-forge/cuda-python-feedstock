@@ -6,6 +6,8 @@
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
 {% set target_name = "x64" %}  # [win64]
+{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux]
+{% set subdir = os.sep.join(["", "Library"]) %}               # [win64]
 
 package:
   name: {{ name|lower }}
@@ -28,8 +30,7 @@ build:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
-    - CUDA_HOME="${PREFIX}/targets/{{ target_name }}"  # [linux]
-    - CUDA_HOME=%PREFIX%\Library                       # [win64]
+    - CUDA_HOME={{ PREFIX ~ subdir ~ os.pathsep ~ BUILD_PREFIX ~ subdir }}
   run_exports:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
