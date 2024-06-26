@@ -15,7 +15,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ee7e3df43da7d924207e03efa4d5e5466801510b3e1f0377d425c6e6a8d823bb
+  sha256: eb6d1b2cd881de0c14963ddb9cb7f3ec5df1b31370133267678265e31fb743b2
 
 build:
   number: 0
