@@ -5,7 +5,9 @@
 {% set patch_version = version.split(".")[2]|int %}
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
-{% set target_name = "x64" %}  # [win]
+{% set target_name = "x64" %}  # [win64]
+{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux]
+{% set subdir = os.sep.join(["", "Library"]) %}               # [win64]
 
 package:
   name: {{ name|lower }}
@@ -13,10 +15,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ee7e3df43da7d924207e03efa4d5e5466801510b3e1f0377d425c6e6a8d823bb
+  sha256: eb6d1b2cd881de0c14963ddb9cb7f3ec5df1b31370133267678265e31fb743b2
 
 build:
-  number: 0
+  number: 1
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
@@ -28,8 +30,7 @@ build:
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
-    - CUDA_HOME="${PREFIX}/targets/{{ target_name }}"  # [linux]
-    - CUDA_HOME=%PREFIX%\Library                       # [win64]
+    - CUDA_HOME={{ PREFIX ~ subdir ~ os.pathsep ~ BUILD_PREFIX ~ subdir }}
   run_exports:
     - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
   ignore_run_exports_from:
@@ -37,7 +38,6 @@ build:
     # The run-exports from these dev packages are too tight, so we ignore them.
     # The cuda-python package supports CUDA Enhanced Compatibility through its
     # use of dlopen, so it is compatible with other CUDA minor versions.
-    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-nvrtc-dev
 
@@ -52,7 +52,6 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
-    - cuda-crt-dev_{{ target_platform }}
     - cuda-cudart-dev
     - cuda-cudart
     - cuda-nvrtc-dev
@@ -72,7 +71,7 @@ requirements:
     # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
     - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
-    - pywin32  # [win]
+    - pywin32  # [win64]
   run_constrained:
     # cuda-cudart is not a hard dependency because cuda-python re-implements
     # cudart. This package is optionally dlopen'd for getting the local cudart
