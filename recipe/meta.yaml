@@ -6,7 +6,7 @@
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
 {% set target_name = "x64" %}  # [win64]
-{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux]
+{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux64 or aarch64]
 {% set subdir = os.sep.join(["", "Library"]) %}               # [win64]
 
 package:
