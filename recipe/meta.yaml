@@ -1,12 +1,12 @@
 {% set name = "cuda-python" %}
-{% set version = "12.5.0" %}
+{% set version = "12.6.0" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
 {% set target_name = "x64" %}  # [win64]
-{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux]
+{% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux64 or aarch64]
 {% set subdir = os.sep.join(["", "Library"]) %}               # [win64]
 
 package:
@@ -15,10 +15,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: eb6d1b2cd881de0c14963ddb9cb7f3ec5df1b31370133267678265e31fb743b2
+  sha256: 4b7f81ca48e91c3af58857641115da294885126f00f0b72e3c87db5ed8549ff3
 
 build:
-  number: 1
+  number: 0
   {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
   skip: true
   {% endif %}
