@@ -19,7 +19,7 @@ source:
 
 build:
   number: 0
-  {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
+  {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
   # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
