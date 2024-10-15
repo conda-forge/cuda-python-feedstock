@@ -48,10 +48,10 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - {{ stdlib('c') }}
-    - cuda-version {{ major_version }}.{{ minor_version }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
+    - cuda-version {{ major_version }}.{{ minor_version }}
   host:
     - cuda-version {{ major_version }}.{{ minor_version }}
     - cuda-cudart-dev
