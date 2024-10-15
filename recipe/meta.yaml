@@ -69,10 +69,10 @@ requirements:
     - versioneer
   run:
     - python
+    - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     # cuda-python requires cuda-nvrtc from the same major version. We ignored
     # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
     - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
-    - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - pywin32  # [win64]
   run_constrained:
     # cuda-cudart is not a hard dependency because cuda-python re-implements
