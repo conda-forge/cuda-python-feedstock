@@ -32,12 +32,12 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
+    - cuda-version {{ major_version }}.{{ minor_version }}
     - cython
     - pip
     - pyclibrary
     - python
     - setuptools
-    - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
