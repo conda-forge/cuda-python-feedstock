@@ -37,7 +37,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
-    - cuda-version {{ major_version }}
+    - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
