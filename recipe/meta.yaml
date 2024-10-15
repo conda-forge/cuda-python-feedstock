@@ -15,10 +15,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 4b7f81ca48e91c3af58857641115da294885126f00f0b72e3c87db5ed8549ff3
+  sha256: d86d4e64f4b8a037260dfc49df2a12f86c668a2137aa8f57be4dc658eb85401f
 
 build:
-  number: 0
+  number: 1
   {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
