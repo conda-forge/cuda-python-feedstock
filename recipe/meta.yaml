@@ -52,6 +52,7 @@ requirements:
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
   host:
+    - cuda-version {{ major_version }}.{{ minor_version }}
     - cuda-cudart-dev
     - cuda-cudart
     - cuda-nvrtc-dev
@@ -66,7 +67,6 @@ requirements:
     - setuptools <74
     - tomli           # [py<311]
     - versioneer
-    - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
     # cuda-python requires cuda-nvrtc from the same major version. We ignored
