@@ -15,11 +15,11 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 4b7f81ca48e91c3af58857641115da294885126f00f0b72e3c87db5ed8549ff3
+  sha256: d86d4e64f4b8a037260dfc49df2a12f86c668a2137aa8f57be4dc658eb85401f
 
 build:
-  number: 0
-  {% if not (environ.get("cuda_compiler_version")|string()).startswith(major_version|string()) %}
+  number: 1
+  {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
   # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
@@ -61,8 +61,10 @@ requirements:
     - pip
     - pyclibrary
     - python
-    - setuptools
-    - tomli  # [py<311]
+    # Pin Setuptools to workaround Windows build issue
+    # xref: https://github.com/conda-forge/cuda-python-feedstock/pull/88#issuecomment-2412656425
+    - setuptools <74
+    - tomli           # [py<311]
     - versioneer
     - cuda-version {{ major_version }}.{{ minor_version }}
   run:
