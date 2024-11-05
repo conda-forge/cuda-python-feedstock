@@ -64,7 +64,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
-    - tomli              # [py<311]
+    - tomli           # [py<311]
     - versioneer
   run:
     - python
