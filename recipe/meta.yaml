@@ -27,7 +27,7 @@ build:
   # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
   skip: true  # [ppc64le]
   script:
-    - pushd cuda
+    - pushd cuda_bindings
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
