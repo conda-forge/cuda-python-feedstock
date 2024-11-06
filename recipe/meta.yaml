@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.4" %}
+{% set version = "11.8.5" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
@@ -10,13 +10,13 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 828563c7890a5c5cb08330f3346bfd67ee9ae6fe2d9de86c3891f70318ddfa39
+  sha256: 0148d9d66232f7c60dad50f5675df986153716ecf7a332295063ca22a33ad87e
 
 build:
   number: 0
   skip: true  # [cuda_compiler_version != "11.8"]
   script:
-    - pushd cuda
+    - pushd cuda_bindings
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
     - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
