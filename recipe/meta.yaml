@@ -39,7 +39,9 @@ requirements:
     - pip
     - pyclibrary
     - python
-    - setuptools
+    # Pin Setuptools to workaround Windows build issue
+    # xref: https://github.com/conda-forge/cuda-python-feedstock/pull/88#issuecomment-2412656425
+    - setuptools <74
     - tomli              # [py<311]
     - versioneer
   run:
