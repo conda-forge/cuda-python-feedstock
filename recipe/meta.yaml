@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.3" %}
+{% set version = "11.8.4" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
@@ -10,12 +10,13 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f2bba3e2c7b32e2931cfcb9c85ac7fa2a051152d3b946ff4248cc7a8cb1ea553
+  sha256: 828563c7890a5c5cb08330f3346bfd67ee9ae6fe2d9de86c3891f70318ddfa39
 
 build:
-  number: 3
-  skip: true  # [py<37 or osx or cuda_compiler_version != "11.8"]
+  number: 0
+  skip: true  # [cuda_compiler_version != "11.8"]
   script:
+    - pushd cuda
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
     - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
@@ -31,7 +32,9 @@ requirements:
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
+    - cuda-version {{ major_version }}.{{ minor_version }}
   host:
+    - cuda-version {{ major_version }}.{{ minor_version }}
     - cython
     - pip
     - pyclibrary
@@ -39,12 +42,13 @@ requirements:
     # Pin Setuptools to workaround Windows build issue
     # xref: https://github.com/conda-forge/cuda-python-feedstock/pull/88#issuecomment-2412656425
     - setuptools <74
-    - cuda-version {{ major_version }}
+    - tomli              # [py<311]
+    - versioneer
   run:
     - python
     - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - cudatoolkit
-    - pywin32  # [win]
+    - pywin32  # [win64]
 
 test:
   imports:
