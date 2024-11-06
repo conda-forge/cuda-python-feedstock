@@ -16,7 +16,7 @@ build:
   number: 0
   skip: true  # [cuda_compiler_version != "11.8"]
   script:
-    - pushd cuda
+    - pushd cuda_bindings
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
     - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
