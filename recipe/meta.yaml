@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "12.6.0" %}
+{% set version = "12.6.1" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
@@ -15,10 +15,10 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: d86d4e64f4b8a037260dfc49df2a12f86c668a2137aa8f57be4dc658eb85401f
+  sha256: 07ce07b02e726f59dc2cd333d3b195df960ecfa4fbe47bbfdbb2541f7485c3d6
 
 build:
-  number: 2
+  number: 0
   {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
@@ -27,6 +27,7 @@ build:
   # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
   skip: true  # [ppc64le]
   script:
+    - pushd cuda
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
@@ -47,11 +48,12 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}
     - {{ stdlib('c') }}
-    - cuda-version {{ major_version }}.{{ minor_version }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
     - cython                              # [build_platform != target_platform]
+    - cuda-version {{ major_version }}.{{ minor_version }}
   host:
+    - cuda-version {{ major_version }}.{{ minor_version }}
     - cuda-cudart-dev
     - cuda-cudart
     - cuda-nvrtc-dev
@@ -61,18 +63,15 @@ requirements:
     - pip
     - pyclibrary
     - python
-    # Pin Setuptools to workaround Windows build issue
-    # xref: https://github.com/conda-forge/cuda-python-feedstock/pull/88#issuecomment-2412656425
-    - setuptools <74
+    - setuptools
     - tomli           # [py<311]
     - versioneer
-    - cuda-version {{ major_version }}.{{ minor_version }}
   run:
     - python
+    - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     # cuda-python requires cuda-nvrtc from the same major version. We ignored
     # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
     - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
-    - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
     - pywin32  # [win64]
   run_constrained:
     # cuda-cudart is not a hard dependency because cuda-python re-implements
@@ -107,3 +106,4 @@ extra:
     - m3vaz
     - mmccarty
     - vyasr
+    - vzhurba01
