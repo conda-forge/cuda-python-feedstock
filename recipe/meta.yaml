@@ -1,5 +1,5 @@
 {% set name = "cuda-python" %}
-{% set version = "11.8.4" %}
+{% set version = "11.8.5" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
