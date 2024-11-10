@@ -11,7 +11,7 @@ package:
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 0148d9d66232f7c60dad50f5675df986153716ecf7a332295063ca22a33ad87e
-  patch:
+  patches:
     - 0001-include-pxd-pyx.patch
 
 build:
