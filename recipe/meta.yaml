@@ -83,6 +83,16 @@ requirements:
     - {{ pin_compatible('cuda-cudart', min_pin='x', max_pin='x') }}
 
 test:
+  requires:
+    - cuda-nvcc
+    - cython
+  files:
+    - test_cimport.pyx
+  commands:
+    - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
+    - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
+    - cythonize -i -3 test_cimport.pyx
+    - python -c "import test_cimport; test_cimport.test()"
   imports:
     - cuda
     - cuda.cuda
