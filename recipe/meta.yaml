@@ -16,9 +16,11 @@ package:
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
   sha256: a6c7f6b802411fb1e0c9c2b6660d70c277a75b4f904f84d38cfe9ac341c9f379
+  patches:
+    - 0001-include-pxd-pyx.patch
 
 build:
-  number: 0
+  number: 1
   {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
@@ -81,6 +83,19 @@ requirements:
     - {{ pin_compatible('cuda-cudart', min_pin='x', max_pin='x') }}
 
 test:
+  requires:
+    - cuda-nvcc
+    - cuda-nvrtc-dev
+    - cuda-profiler-api
+    - cython
+    - setuptools
+  files:
+    - test_cimport.pyx
+  commands:
+    - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
+    - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
+    - cythonize -i -3 test_cimport.pyx
+    - python -c "import test_cimport; test_cimport.test()"
   imports:
     - cuda
     - cuda.cuda
