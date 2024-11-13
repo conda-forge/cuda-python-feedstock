@@ -11,9 +11,11 @@ package:
 source:
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 0148d9d66232f7c60dad50f5675df986153716ecf7a332295063ca22a33ad87e
+  patches:
+    - 0001-include-pxd-pyx.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [cuda_compiler_version != "11.8"]
   script:
     - pushd cuda_bindings
@@ -51,6 +53,19 @@ requirements:
     - pywin32  # [win64]
 
 test:
+  requires:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cython
+    - setuptools
+  files:
+    - test_cimport.pyx
+  commands:
+    - export C_INCLUDE_PATH="$CUDA_HOME/include"  # [linux]
+    - set "CL=%CL% /I"%CUDA_HOME%\include""       # [win]
+    - echo %CUDA_HOME%                            # [win]
+    - cythonize -i -3 test_cimport.pyx
+    - python -c "import test_cimport; test_cimport.test()"
   imports:
     - cuda
     - cuda.cuda
@@ -76,3 +91,4 @@ extra:
     - m3vaz
     - mmccarty
     - vyasr
+    - vzhurba01
