@@ -54,6 +54,8 @@ requirements:
 
 test:
   requires:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cython
     - setuptools
   files:
