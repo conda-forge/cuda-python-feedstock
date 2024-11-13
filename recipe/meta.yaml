@@ -85,6 +85,8 @@ requirements:
 test:
   requires:
     - cuda-nvcc
+    - cuda-nvrtc-dev
+    - cuda-profiler-api
     - cython
   files:
     - test_cimport.pyx
