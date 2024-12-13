@@ -14,13 +14,12 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a6c7f6b802411fb1e0c9c2b6660d70c277a75b4f904f84d38cfe9ac341c9f379
-  patches:
-    - 0001-include-pxd-pyx.patch
+  # TODO: remove the hard-coded .post1 in the next release
+  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.post1.tar.gz
+  sha256: abbfad534cb51d79f748cc5dfdc761fa6bb2c7a2b59e64b1d03608e7b0f64b1b
 
 build:
-  number: 1
+  number: 2
   {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
   skip: true
   {% endif %}
