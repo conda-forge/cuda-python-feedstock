@@ -20,13 +20,12 @@ source:
 
 build:
   number: 2
-  {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
-  skip: true
-  {% endif %}
   # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
   # So skip building `cuda-python` on `linux_ppc64le`
   # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
-  skip: true  # [ppc64le]
+  {% if ppc64le or not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
+  skip: true
+  {% endif %}
   script:
     - pushd cuda_bindings
     - {{ PYTHON }} -m pip install . --no-deps -vv
