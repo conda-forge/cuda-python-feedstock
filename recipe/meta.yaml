@@ -14,22 +14,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a6c7f6b802411fb1e0c9c2b6660d70c277a75b4f904f84d38cfe9ac341c9f379
+  # TODO: remove the hard-coded .post1 and the patch in the next release
+  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.post1.tar.gz
+  sha256: abbfad534cb51d79f748cc5dfdc761fa6bb2c7a2b59e64b1d03608e7b0f64b1b
   patches:
-    - 0001-include-pxd-pyx.patch
+    - versioneer_overwrite.diff
 
 build:
-  number: 1
-  {% if not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
-  skip: true
-  {% endif %}
+  number: 2
   # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
   # So skip building `cuda-python` on `linux_ppc64le`
   # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
-  skip: true  # [ppc64le]
+  {% if ppc64le or not (environ.get("cuda_compiler_version")|string()) == (major_version|string()) %}
+  skip: true
+  {% endif %}
   script:
     - pushd cuda_bindings
+    - python -c "import versioneer; print(versioneer.get_version())"
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
@@ -66,6 +67,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
+    # TODO: remove these in the next release
     - tomli           # [py<311]
     - versioneer
   run:
@@ -96,6 +98,8 @@ test:
     - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
     - cythonize -i -3 test_cimport.pyx
     - python -c "import test_cimport; test_cimport.test()"
+    - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
+    - python -c "import cuda; print(cuda.__version__)"  # TODO: Remove this
   imports:
     - cuda
     - cuda.cuda
