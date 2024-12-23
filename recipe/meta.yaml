@@ -14,9 +14,11 @@ package:
   version: {{ version }}
 
 source:
-  # TODO: remove the hard-coded .post1 in the next release
+  # TODO: remove the hard-coded .post1 and the patch in the next release
   url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.post1.tar.gz
   sha256: abbfad534cb51d79f748cc5dfdc761fa6bb2c7a2b59e64b1d03608e7b0f64b1b
+  patches:
+    - versioneer_overwrite.diff
 
 build:
   number: 2
@@ -28,6 +30,7 @@ build:
   {% endif %}
   script:
     - pushd cuda_bindings
+    - python -c "import versioneer; print(versioneer.get_version())"
     - {{ PYTHON }} -m pip install . --no-deps -vv
   script_env:
     # Ensure that CUDA includes can be found by the host compiler
@@ -64,6 +67,7 @@ requirements:
     - pyclibrary
     - python
     - setuptools
+    # TODO: remove these in the next release
     - tomli           # [py<311]
     - versioneer
   run:
