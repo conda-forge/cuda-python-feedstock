@@ -1,20 +1,41 @@
-About cuda-python-split-feedstock
-=================================
+About cuda-python-feedstock
+===========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-python-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/NVIDIA/cuda-python
+
+About cuda-python
+-----------------
+
+Home: https://nvidia.github.io/cuda-python/
 
 Package license: [LicenseRef-NVIDIA-SOFTWARE-LICENSE](https://github.com/NVIDIA/cuda-python/blob/main/LICENSE)
 
-Summary: CUDA Python Low-level Bindings
+Summary: CUDA Python
 
 Development: https://github.com/NVIDIA/cuda-python
 
 Documentation: https://nvidia.github.io/cuda-python/
 
-CUDA Python provides a standard set of low-level interfaces,
-providing full coverage of and access to the CUDA host APIs from Python.
+CUDA Python is the home for accessing NVIDIA's CUDA platform from Python.
+
+
+About cuda-core
+---------------
+
+Home: https://nvidia.github.io/cuda-python/cuda-core
+
+Package license: [LicenseRef-NVIDIA-SOFTWARE-LICENSE](https://github.com/NVIDIA/cuda-python/blob/main/LICENSE)
+
+Summary: cuda.core: (experimental) pythonic CUDA module
+
+Development: https://github.com/NVIDIA/cuda-python
+
+Documentation: https://nvidia.github.io/cuda-python/cuda-core
+
+cuda.core bridges Python's productivity with CUDA's performance through intuitive and pythonic APIs.
+The mission is to provide users full access to all of the core CUDA features in Python, such as
+runtime control, compiler and linker.
 
 
 Current build status
@@ -28,7 +49,7 @@ Current build status
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
             <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main">
           </a>
         </summary>
@@ -37,105 +58,105 @@ Current build status
           <tbody><tr>
               <td>linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.13.____cp313</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.13.____cp313</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_cuda_compilerNonecuda_compiler_versionNonepython3.13.____cp313</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compilerNonecuda_compiler_versionNonepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython" alt="variant">
                 </a>
               </td>
@@ -154,10 +175,10 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--core-green.svg)](https://anaconda.org/conda-forge/cuda-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-core.svg)](https://anaconda.org/conda-forge/cuda-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-core.svg)](https://anaconda.org/conda-forge/cuda-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-core.svg)](https://anaconda.org/conda-forge/cuda-core) |
 
-Installing cuda-python-split
-============================
+Installing cuda-python
+======================
 
-Installing `cuda-python-split` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `cuda-python` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -243,17 +264,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating cuda-python-split-feedstock
-====================================
+Updating cuda-python-feedstock
+==============================
 
-If you would like to improve the cuda-python-split recipe or build a new
+If you would like to improve the cuda-python recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/cuda-python-split-feedstock are
+Note that all branches in the conda-forge/cuda-python-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
