@@ -160,9 +160,9 @@ outputs:
         # TODO: make this a cuda-python/cuda-bindings dep
         - libnvjitlink
     test:
-      imports:
-        - cuda.core.experimental.Device
-        - cuda.core.experimental.utils
+      commands:
+        - python -c "from cuda.core.experimental import Device"
+        - python -c "from cuda.core.experimental import utils"
   {% endif %}
 
 about:
