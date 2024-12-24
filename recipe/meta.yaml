@@ -9,19 +9,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 0148d9d66232f7c60dad50f5675df986153716ecf7a332295063ca22a33ad87e
+  # TODO: remove the hard-coded .post1 and the patch in the next release
+  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/v{{ version }}.post1.tar.gz
+  sha256: 633ca2fb3daabc2550ab3d6d5dc2b97eaa2b0be4b80773fb08857356a2053254
   patches:
-    - 0001-include-pxd-pyx.patch
+    - versioneer_overwrite.diff
 
 build:
-  number: 1
+  number: 2
   skip: true  # [cuda_compiler_version != "11.8"]
   script:
     - pushd cuda_bindings
+    - python -c "import versioneer; print(versioneer.get_version())"
     - {{ PYTHON }} -m pip install . --no-deps -vv
   run_exports:
-    - cuda-python >=11.7.1,<12  # we need this because CUDA Python 11.7.1 has ABI breaks, see conda-forge/cuda-python-feedstock#15
+    - cuda-python >=11.8.5,<12  # we need this because CUDA Python 11.8.5 has ABI breaks, see NVIDIA/cuda-python#274
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
@@ -44,6 +46,7 @@ requirements:
     # Pin Setuptools to workaround Windows build issue
     # xref: https://github.com/conda-forge/cuda-python-feedstock/pull/88#issuecomment-2412656425
     - setuptools <74
+    # TODO: remove these in the next release
     - tomli              # [py<311]
     - versioneer
   run:
@@ -62,10 +65,12 @@ test:
     - test_cimport.pyx
   commands:
     - export C_INCLUDE_PATH="$CUDA_HOME/include"  # [linux]
+    - set "CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v{{ major_version }}.{{ minor_version }}"  # [win]
     - set "CL=%CL% /I"%CUDA_HOME%\include""       # [win]
-    - echo %CUDA_HOME%                            # [win]
     - cythonize -i -3 test_cimport.pyx
     - python -c "import test_cimport; test_cimport.test()"
+    - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
+    - python -c "import cuda; print(cuda.__version__)"  # TODO: Remove this
   imports:
     - cuda
     - cuda.cuda
