@@ -12,7 +12,7 @@
   {% set building_bindings = false %}
   {% set building_core = true %}
   {% set tag = "cuda-core-v" ~ pkg_ver %}
-  {% set number = 0 %}
+  {% set number = 1 %}
 {% endif %}
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
@@ -100,6 +100,8 @@ outputs:
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
+        # TODO: add this in the next release 
+        #- libnvjitlink
         - pywin32  # [win64]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python re-implements
@@ -168,8 +170,6 @@ outputs:
         - numpy
         # TODO: replace by cuda-bindings once it's ready
         - cuda-python
-        # TODO: make this a cuda-python/cuda-bindings dep
-        - libnvjitlink
     test:
       commands:
         - python -c "from cuda.core.experimental import Device"
