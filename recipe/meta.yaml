@@ -1,11 +1,8 @@
-#{% set version = "0.1.1" %}
 {% set version = "12.6.2" %}
 {% set major_version = version.split(".")[0]|int %}
 {% set minor_version = version.split(".")[1]|int %}
 {% set patch_version = version.split(".")[2]|int %}
 {% set pkg_ver = major_version ~ "." ~ minor_version ~ "." ~ patch_version %}
-{% set building_bindings = true %}
-{% set building_core = true %}
 {% if major_version != 0 %}
   {% set building_bindings = true %}
   {% set building_core = false %}
@@ -23,11 +20,6 @@
 {% set subdir = "" %}
 {% set subdir = os.sep.join(["", "targets", target_name]) %}  # [linux64 or aarch64]
 {% set subdir = os.sep.join(["", "Library"]) %}               # [win64]
-
-# # {{ PYTHON }} is not resolved properly in multi-output recipes...
-# {% set PYTHON = "python" %}
-# {% set PYTHON = "$PREFIX/bin/python" %}  # [linux]
-# {% set PYTHON = "%PREFIX%\\python" %}  # [win]
 
 package:
   name: cuda-python-split
@@ -61,10 +53,8 @@ outputs:
     script: build_bindings.bat  # [win]
     build:
       number: {{ number }}
-      # `linux_ppc64le` is unsupported by the CUDA Toolkit as of 12.5.0.
-      # So skip building `cuda-python` on `linux_ppc64le`
-      # xref: https://github.com/conda-forge/cuda-feedstock/issues/27
-      {% if ppc64le or not (environ.get("cuda_compiler_version")|string()) == (major_version ~ "." ~ minor_version) %}
+      # cuda.bindings needs to be built with the matching major.minor headers
+      {% if not (environ.get("cuda_compiler_version")|string()) == (major_version ~ "." ~ minor_version) %}
       skip: true
       {% endif %}
       script_env:
@@ -147,9 +137,7 @@ outputs:
     build:
       number: {{ number }}
       # building cuda-core does not require CUDA/NVCC
-      {% if ppc64le or (cuda_compiler_version or "") != "" %}
-      skip: true
-      {% endif %}
+      skip: true  # [cuda_compiler_version != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
