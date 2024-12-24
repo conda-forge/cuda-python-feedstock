@@ -65,8 +65,8 @@ test:
     - test_cimport.pyx
   commands:
     - export C_INCLUDE_PATH="$CUDA_HOME/include"  # [linux]
+    - set "CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v{{ major_version }}.{{ minor_version }}"  # [win]
     - set "CL=%CL% /I"%CUDA_HOME%\include""       # [win]
-    - echo %CUDA_HOME%                            # [win]
     - cythonize -i -3 test_cimport.pyx
     - python -c "import test_cimport; test_cimport.test()"
     - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
