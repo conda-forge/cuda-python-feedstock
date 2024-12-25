@@ -1,12 +1,9 @@
 ######### Configure these for each git tag release #########
 {% set git_tag = "cuda-core-v0.1.1" %}
 {% set core_version = "0.1.1" %}
-{% set core_number = 1 %}
 {% set bindings_version = "12.6.2" %}
-{% set bindings_number = 2 %}
-{% set build_core = true %}
-{% set build_bindings = false %}
 ############################################################
+{% set number = 3 %}
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
 {% set core_patch_version = core_version.split(".")[2]|int %}
@@ -52,9 +49,11 @@ outputs:
     script: build_bindings.sh   # [linux]
     script: build_bindings.bat  # [win]
     build:
-      number: {{ bindings_number }}
+      number: {{ number }}
       # cuda.bindings needs to be built with the matching major.minor headers
       {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
+      skip: true
+      {% else %}
       skip: true  # [not build_bindings]
       {% endif %}
       script_env:
@@ -146,9 +145,9 @@ outputs:
     script: build_core.sh   # [linux]
     script: build_core.bat  # [win]
     build:
-      number: {{ core_number }}
+      number: {{ number }}
       # building cuda-core does not require CUDA/NVCC
-      skip: true  # [cuda_compiler_version != "None" and not build_core]
+      skip: true  # [cuda_compiler_version != "None" or not build_core]
     requirements:
       build:
         - {{ compiler('c') }}

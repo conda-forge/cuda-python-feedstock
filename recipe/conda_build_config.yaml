@@ -1,0 +1,6 @@
+######### Configure these for each git tag release #########
+build_bindings:
+  - False
+build_core:
+  - True
+############################################################
