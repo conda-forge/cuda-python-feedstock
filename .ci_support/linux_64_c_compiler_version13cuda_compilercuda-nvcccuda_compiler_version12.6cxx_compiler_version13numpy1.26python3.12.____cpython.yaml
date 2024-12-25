@@ -1,3 +1,5 @@
+bindings_version:
+- 12.6.2
 build_core:
 - 'True'
 c_compiler:
@@ -14,6 +16,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+core_version:
+- 0.1.1
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
@@ -24,6 +28,8 @@ cxx_compiler_version:
 - '13'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:cos7
+git_tag:
+- cuda-core-v0.1.1
 numpy:
 - '1.26'
 pin_run_as_build:

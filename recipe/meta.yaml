@@ -1,9 +1,8 @@
-######### Configure these for each git tag release #########
-{% set git_tag = "cuda-core-v0.1.1" %}
-{% set core_version = "0.1.1" %}
-{% set bindings_version = "12.6.2" %}
-############################################################
+# Note: For each release please update the variables in conda_build_config.yaml.
 {% set number = 3 %}
+{% set git_tag = environ.get("git_tag") %}
+{% set core_version = environ.get("core_version", "0.0.0") %}
+{% set bindings_version = environ.get("bindings_version", "0.0.0") %}
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
 {% set core_patch_version = core_version.split(".")[2]|int %}
@@ -157,6 +156,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}
         - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
