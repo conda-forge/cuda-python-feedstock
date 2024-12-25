@@ -146,8 +146,13 @@ outputs:
     script: build_core.bat  # [win]
     build:
       number: {{ number }}
-      # building cuda-core does not require CUDA/NVCC
-      skip: true  # [cuda_compiler_version != "None" or not build_core]
+      # Whiile building cuda-core does not require CUDA/NVCC, we use the same skip condition here
+      # so that all packages can be built in the same CI pipelines.
+      {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
+      skip: true
+      {% else %}
+      skip: true  # [not build_core]
+      {% endif %}
     requirements:
       build:
         - {{ compiler('c') }}
