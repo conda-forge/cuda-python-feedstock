@@ -3,6 +3,9 @@
 {% set git_tag = environ.get("git_tag") %}
 {% set core_version = environ.get("core_version", "0.0.0") %}
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
+{% set build_bindings = environ.get("build_bindings", False) | bool %}
+{% set build_core = environ.get("build_core", False) | bool %}
+
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
 {% set core_patch_version = core_version.split(".")[2]|int %}
