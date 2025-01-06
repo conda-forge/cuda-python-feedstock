@@ -1,5 +1,7 @@
 bindings_version:
 - 12.6.2
+build_bindings:
+- 'False'
 build_core:
 - 'True'
 c_compiler:
