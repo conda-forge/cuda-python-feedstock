@@ -1,19 +1,19 @@
-{% set version = "0.1.1" %}
-{% set major_version = version.split(".")[0]|int %}
-{% set minor_version = version.split(".")[1]|int %}
-{% set patch_version = version.split(".")[2]|int %}
-{% set pkg_ver = major_version ~ "." ~ minor_version ~ "." ~ patch_version %}
-{% if major_version != 0 %}
-  {% set building_bindings = true %}
-  {% set building_core = false %}
-  {% set tag = "v" ~ pkg_ver %}
-  {% set number = 2 %}
-{% else %}
-  {% set building_bindings = false %}
-  {% set building_core = true %}
-  {% set tag = "cuda-core-v" ~ pkg_ver %}
-  {% set number = 1 %}
-{% endif %}
+# Note: For each release please update the variables in conda_build_config.yaml.
+{% set number = 3 %}
+{% set git_tag = environ.get("git_tag") %}
+{% set core_version = environ.get("core_version", "0.0.0") %}
+{% set bindings_version = environ.get("bindings_version", "0.0.0") %}
+{% set build_bindings = environ.get("build_bindings", False) %}
+{% set build_core = environ.get("build_core", False) %}
+
+{% set core_major_version = core_version.split(".")[0]|int %}
+{% set core_minor_version = core_version.split(".")[1]|int %}
+{% set core_patch_version = core_version.split(".")[2]|int %}
+{% set core_ver = core_major_version ~ "." ~ core_minor_version ~ "." ~ core_patch_version %}
+{% set bindings_major_version = bindings_version.split(".")[0]|int %}
+{% set bindings_minor_version = bindings_version.split(".")[1]|int %}
+{% set bindings_patch_version = bindings_version.split(".")[2]|int %}
+{% set bindings_ver = bindings_major_version ~ "." ~ bindings_minor_version ~ "." ~ bindings_patch_version %}
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
 {% set target_name = "x64" %}  # [win64]
@@ -23,10 +23,10 @@
 
 package:
   name: cuda-python-split
-  version: {{ version }}
+  version: 1
 
 source:
-  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/{{ tag }}.tar.gz
+  url: https://github.com/NVIDIA/cuda-python/archive/refs/tags/{{ git_tag }}.tar.gz
   sha256: e6b510a0b2f326d834ac9bf7b0c8b93aff8ed5f9fd276453b40375c6314b7060
 
 build:
@@ -46,16 +46,17 @@ requirements:
 
 outputs:
 
-  {% if building_bindings %}
   - name: cuda-python
-    version: {{ pkg_ver }}
+    version: {{ bindings_ver }}
     script: build_bindings.sh   # [linux]
     script: build_bindings.bat  # [win]
     build:
       number: {{ number }}
       # cuda.bindings needs to be built with the matching major.minor headers
-      {% if not (environ.get("cuda_compiler_version")|string()) == (major_version ~ "." ~ minor_version) %}
+      {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
       skip: true
+      {% else %}
+      skip: true  # [not build_bindings]
       {% endif %}
       script_env:
         # Ensure that CUDA includes can be found by the host compiler
@@ -78,9 +79,9 @@ outputs:
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
         - cython                              # [build_platform != target_platform]
-        - cuda-version {{ major_version }}.{{ minor_version }}
+        - cuda-version {{ bindings_major_version }}.{{ bindings_minor_version }}
       host:
-        - cuda-version {{ major_version }}.{{ minor_version }}
+        - cuda-version {{ bindings_major_version }}.{{ bindings_minor_version }}
         - cuda-cudart-dev
         - cuda-cudart
         - cuda-nvrtc-dev
@@ -140,21 +141,25 @@ outputs:
         providing full coverage of and access to the CUDA host APIs from Python.
       doc_url: https://nvidia.github.io/cuda-python/cuda-bindings
       dev_url: https://github.com/NVIDIA/cuda-python
-  {% endif %}
 
-  {% if building_core %}
   - name: cuda-core
-    version: {{ pkg_ver }}
+    version: {{ core_ver }}
     script: build_core.sh   # [linux]
     script: build_core.bat  # [win]
     build:
       number: {{ number }}
-      # building cuda-core does not require CUDA/NVCC
-      skip: true  # [cuda_compiler_version != "None"]
+      # Whiile building cuda-core does not require CUDA/NVCC, we use the same skip condition here
+      # so that all packages can be built in the same CI pipelines.
+      {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
+      skip: true
+      {% else %}
+      skip: true  # [not build_core]
+      {% endif %}
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}
         - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
@@ -186,7 +191,6 @@ outputs:
         runtime control, compiler and linker.
       doc_url: https://nvidia.github.io/cuda-python/cuda-core
       dev_url: https://github.com/NVIDIA/cuda-python
-  {% endif %}
 
 about:
   home: https://nvidia.github.io/cuda-python/
