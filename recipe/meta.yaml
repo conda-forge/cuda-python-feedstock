@@ -143,6 +143,7 @@ outputs:
         # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
         # of cuda-cudart-dev and instead allow a looser pinning here.
         - {{ pin_compatible('cuda-cudart', min_pin='x', max_pin='x') }}
+        - {{ pin_subpackage('cuda-python', max_pin='x.x') }}
     test:
       requires:
         - cuda-nvcc
