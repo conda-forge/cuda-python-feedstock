@@ -21,9 +21,9 @@ channel_targets:
 core_version:
 - 0.1.1
 cuda_compiler:
-- cuda-nvcc
+- None
 cuda_compiler_version:
-- '12.8'
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -41,7 +41,7 @@ python:
 python_min:
 - '3.9'
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
