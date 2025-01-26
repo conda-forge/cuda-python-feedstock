@@ -54,7 +54,7 @@ outputs:
       {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
       skip: true
       {% else %}
-      skip: true  # [not build_bindings]
+      skip: true  # [not build_bindings or aarch64]
       {% endif %}
     requirements:
       host:
