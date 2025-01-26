@@ -57,7 +57,7 @@ outputs:
         - python
       run:
         - python
-        - {{ pin_subpackage('cupy-bindings', max_pin='x.x') }}
+        - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
         - cuda-version >=12.0,<13.0a0
     test:
       imports:
