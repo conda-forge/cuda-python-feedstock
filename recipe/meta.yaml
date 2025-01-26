@@ -48,6 +48,37 @@ outputs:
 
   - name: cuda-python
     version: {{ bindings_ver }}
+    build:
+      noarch: python
+      number: {{ number }}
+      skip: true  # [not build_bindings]
+    requirements:
+      host:
+        - python
+      run:
+        - python
+        - {{ pin_subpackage('cupy-bindings', max_pin='x.x') }}
+        - cuda-version >=12.0,<13.0a0
+    test:
+      imports:
+        - cuda.bindings
+        - cuda.bindings.driver
+        - cuda.bindings.runtime
+        - cuda.bindings.nvrtc
+        - cuda.bindings.nvjitlink
+    about:
+      home: https://nvidia.github.io/cuda-python/
+      license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+      license_file: LICENSE
+      license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
+      summary: CUDA Python
+      description: |
+        CUDA Python is the home for accessing NVIDIA’s CUDA platform from Python.
+      doc_url: https://nvidia.github.io/cuda-python/
+      dev_url: https://github.com/NVIDIA/cuda-python
+
+  - name: cuda-bindings
+    version: {{ bindings_ver }}
     script: build_bindings.sh   # [linux]
     script: build_bindings.bat  # [win]
     build:
