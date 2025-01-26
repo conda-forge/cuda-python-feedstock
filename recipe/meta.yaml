@@ -54,12 +54,14 @@ outputs:
       skip: true  # [not build_bindings]
     requirements:
       host:
-        - python
+        - python {{ python_min }}
       run:
-        - python
+        - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
         - cuda-version >=12.0,<13.0a0
     test:
+      requires:
+        - python >={{ python_min }}
       imports:
         - cuda.bindings
         - cuda.bindings.driver
