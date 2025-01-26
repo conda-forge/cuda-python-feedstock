@@ -58,9 +58,11 @@ outputs:
       {% endif %}
     requirements:
       host:
-        - python {{ python_min }}
+        - python {{ python_min }}.*
       run:
         - python >={{ python_min }}
+        - __linux  # [linux]
+        - __win    # [win]
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
         - cuda-version >=12.0,<13.0a0
     test:
