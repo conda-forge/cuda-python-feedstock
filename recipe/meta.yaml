@@ -87,8 +87,6 @@ outputs:
 
   - name: cuda-bindings
     version: {{ bindings_ver }}
-    script: build_bindings.sh   # [linux]
-    script: build_bindings.bat  # [win]
     build:
       number: {{ number }}
       # cuda.bindings needs to be built with the matching major.minor headers
@@ -180,8 +178,6 @@ outputs:
 
   - name: cuda-core
     version: {{ core_ver }}
-    script: build_core.sh   # [linux]
-    script: build_core.bat  # [win]
     build:
       number: {{ number }}
       # While building cuda-core does not require CUDA/NVCC, we use the same skip condition here
