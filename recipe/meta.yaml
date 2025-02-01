@@ -54,15 +54,13 @@ outputs:
       {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
       skip: true
       {% else %}
-      skip: true  # [not build_bindings or aarch64]
+      skip: true  # [not build_bindings or not linux64]
       {% endif %}
     requirements:
       host:
         - python {{ python_min }}.*
       run:
         - python >={{ python_min }}
-        - __linux  # [linux]
-        - __win    # [win]
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
         - cuda-version >=12.0,<13.0a0
     test:
