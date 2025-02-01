@@ -59,6 +59,8 @@ outputs:
     requirements:
       host:
         - python {{ python_min }}.*
+        - pip
+        - setuptools
       run:
         - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
