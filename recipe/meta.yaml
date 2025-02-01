@@ -48,6 +48,8 @@ outputs:
 
   - name: cuda-python
     version: {{ bindings_ver }}
+    script: build_python.sh   # [linux]
+    script: build_python.bat  # [win]
     build:
       noarch: python
       number: {{ number }}
