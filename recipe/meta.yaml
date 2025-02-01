@@ -50,7 +50,7 @@ outputs:
     version: {{ bindings_ver }}
     build:
       noarch: python
-      number: {{ number }}
+      number: {{ number|int + 1 }}
       {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
       skip: true
       {% else %}
@@ -74,6 +74,8 @@ outputs:
         - cuda.bindings.runtime
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
+      commands:
+        - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
       home: https://nvidia.github.io/cuda-python/
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
