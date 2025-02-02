@@ -48,21 +48,23 @@ outputs:
 
   - name: cuda-python
     version: {{ bindings_ver }}
+    script: build_output.sh   # [linux]
+    script: build_output.bat  # [win]
     build:
       noarch: python
-      number: {{ number }}
+      number: {{ number|int + 1 }}
       {% if not (environ.get("cuda_compiler_version")|string()) == (bindings_major_version ~ "." ~ bindings_minor_version) %}
       skip: true
       {% else %}
-      skip: true  # [not build_bindings or aarch64]
+      skip: true  # [not build_bindings or not linux64]
       {% endif %}
     requirements:
       host:
         - python {{ python_min }}.*
+        - pip
+        - setuptools
       run:
         - python >={{ python_min }}
-        - __linux  # [linux]
-        - __win    # [win]
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
         - cuda-version >=12.0,<13.0a0
     test:
@@ -74,6 +76,8 @@ outputs:
         - cuda.bindings.runtime
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
+      commands:
+        - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
       home: https://nvidia.github.io/cuda-python/
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
@@ -87,8 +91,8 @@ outputs:
 
   - name: cuda-bindings
     version: {{ bindings_ver }}
-    script: build_bindings.sh   # [linux]
-    script: build_bindings.bat  # [win]
+    script: build_output.sh   # [linux]
+    script: build_output.bat  # [win]
     build:
       number: {{ number }}
       # cuda.bindings needs to be built with the matching major.minor headers
@@ -180,8 +184,8 @@ outputs:
 
   - name: cuda-core
     version: {{ core_ver }}
-    script: build_core.sh   # [linux]
-    script: build_core.bat  # [win]
+    script: build_output.sh   # [linux]
+    script: build_output.bat  # [win]
     build:
       number: {{ number }}
       # While building cuda-core does not require CUDA/NVCC, we use the same skip condition here
