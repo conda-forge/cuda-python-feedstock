@@ -1,14 +1,14 @@
 ######### Configure these for each git tag release #########
 git_tag:
-  - "v12.8.0"
+  - "cuda-core-v0.2.0"
 bindings_version:
   - "12.8.0"
 core_version:
-  - "0.1.1"
+  - "0.2.0"
 build_bindings:
-  - True
-build_core:
   - False
+build_core:
+  - True
 
 # We often cannot follow what the global pinning does. This is where
 # we overwrite the global setting. (Really cuda_compiler_version is
