@@ -1,9 +1,9 @@
 bindings_version:
 - 12.8.0
 build_bindings:
-- 'True'
-build_core:
 - 'False'
+build_core:
+- 'True'
 c_compiler:
 - vs2019
 c_stdlib:
@@ -13,7 +13,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 core_version:
-- 0.1.1
+- 0.2.0
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
@@ -21,13 +21,15 @@ cuda_compiler_version:
 cxx_compiler:
 - vs2019
 git_tag:
-- v12.8.0
+- cuda-core-v0.2.0
+numpy:
+- '1.22'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.9.* *_cpython
 python_min:
 - '3.9'
 target_platform:
@@ -35,3 +37,5 @@ target_platform:
 zip_keys:
 - - cuda_compiler
   - cuda_compiler_version
+- - python
+  - numpy
