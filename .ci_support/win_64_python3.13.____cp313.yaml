@@ -14,10 +14,6 @@ channel_targets:
 - conda-forge main
 core_version:
 - 0.2.0
-cuda_compiler:
-- cuda-nvcc
-cuda_compiler_version:
-- '12.9'
 cxx_compiler:
 - vs2019
 git_tag:
@@ -27,11 +23,8 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.13.* *_cp313
 python_min:
 - '3.9'
 target_platform:
 - win-64
-zip_keys:
-- - cuda_compiler
-  - cuda_compiler_version

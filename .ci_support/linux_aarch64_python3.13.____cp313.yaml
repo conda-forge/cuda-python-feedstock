@@ -20,10 +20,6 @@ channel_targets:
 - conda-forge main
 core_version:
 - 0.2.0
-cuda_compiler:
-- cuda-nvcc
-cuda_compiler_version:
-- '12.9'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -37,7 +33,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.13.* *_cp313
 python_min:
 - '3.9'
 target_platform:
@@ -45,6 +41,3 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-  - cuda_compiler
-  - cuda_compiler_version
-  - docker_image
