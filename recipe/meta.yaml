@@ -113,6 +113,7 @@ outputs:
       host:
         # cuda.bindings needs to be built with the matching major.minor headers
         - cuda-version {{ bindings_major_version }}.{{ bindings_minor_version }}
+        - cuda-crt-dev
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-cudart
