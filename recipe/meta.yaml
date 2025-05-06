@@ -76,7 +76,7 @@ outputs:
     about:
       home: https://nvidia.github.io/cuda-python/
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-      license_file: LICENSE
+      license_file: cuda_python/LICENSE
       license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
       summary: CUDA Python
       description: |
@@ -100,7 +100,9 @@ outputs:
         # The run-exports from these dev packages are too tight, so we ignore them.
         # The cuda-python package supports CUDA Enhanced Compatibility through its
         # use of dlopen, so it is compatible with other CUDA minor versions.
+        - cuda-nvcc-impl
         - cuda-cudart-dev
+        - cuda-cudart-static
         - cuda-nvrtc-dev
     requirements:
       build:
@@ -165,7 +167,7 @@ outputs:
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-      license_file: LICENSE
+      license_file: cuda_bindings/LICENSE
       license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
       summary: CUDA Python Low-level Bindings
       description: |
@@ -207,7 +209,7 @@ outputs:
     about:
       home: https://nvidia.github.io/cuda-python/cuda-core
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-      license_file: LICENSE
+      license_file: cuda_core/LICENSE
       license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
       summary: "cuda.core: (experimental) pythonic CUDA module"
       description: |
@@ -220,7 +222,7 @@ outputs:
 about:
   home: https://nvidia.github.io/cuda-python/
   license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-  license_file: LICENSE
+  license_file: LICENSE.md
   license_url: https://github.com/NVIDIA/cuda-python/blob/main/LICENSE
   summary: CUDA Python
   description: |
