@@ -1,85 +1,12 @@
 ######### Configure these for each git tag release #########
 git_tag:
-  - "cuda-core-v0.2.0"
+  - "v12.9.0"
 bindings_version:
-  - "12.8.0"
+  - "12.9.0"
 core_version:
   - "0.2.0"
 build_bindings:
-  - False
-build_core:
   - True
-
-# We often cannot follow what the global pinning does. This is where
-# we overwrite the global setting. (Really cuda_compiler_version is
-# the only thing we need to overwrite... The rest is copy-pasta.)
-c_compiler_version:            # [unix]
-  - 13                         # [linux]
-  - 18                         # [osx]
-  - 11                         # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  # CUDA 12.4 on PPC does not support GCC 13
-  - 12                         # [linux and ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 13                         # [linux and not ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-cxx_compiler_version:          # [unix]
-  - 13                         # [linux]
-  - 18                         # [osx]
-  - 11                         # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12                         # [linux and ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 13                         # [linux and not ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-fortran_compiler_version:      # [unix or win64]
-  - 13                         # [linux]
-  - 13                         # [osx]
-  - 5                          # [win64]
-  - 11                         # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12                         # [linux and ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 13                         # [linux and not ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-cuda_compiler:
-  - None
-  - nvcc                       # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - cuda-nvcc                  # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-cuda_compiler_version:
-  - None
-  - 11.8                       # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12.4                       # [linux and ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12.8                       # [((linux and not ppc64le) or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-docker_image:                                       # [os.environ.get("BUILD_PLATFORM", "").startswith("linux-")]
-  # non-CUDA-enabled builds on CentOS 7
-  - quay.io/condaforge/linux-anvil-x86_64:cos7      # [os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-  - quay.io/condaforge/linux-anvil-aarch64:cos7     # [os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-  - quay.io/condaforge/linux-anvil-ppc64le:cos7     # [os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-
-  # non-CUDA-enabled builds on AlmaLinux 8
-  - quay.io/condaforge/linux-anvil-x86_64:alma8     # [os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-  - quay.io/condaforge/linux-anvil-aarch64:alma8    # [os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-  - quay.io/condaforge/linux-anvil-ppc64le:alma8    # [os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-
-  # non-CUDA-enabled builds on AlmaLinux 9
-  - quay.io/condaforge/linux-anvil-x86_64:alma9     # [os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
-  - quay.io/condaforge/linux-anvil-aarch64:alma9    # [os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
-  - quay.io/condaforge/linux-anvil-ppc64le:alma9    # [os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
-
-  # CUDA 11.8 builds (only x64 has a DEFAULT_LINUX_VERSION choice; alma9 not available)
-  - quay.io/condaforge/linux-anvil-x86_64-cuda11.8:cos7     # [linux64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "ubi8") == "cos7"]
-  - quay.io/condaforge/linux-anvil-x86_64-cuda11.8:ubi8     # [linux64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "ubi8") in ("ubi8", "alma8", "alma9")]
-  # CUDA 11.8 arch: native compilation (build == target)
-  - quay.io/condaforge/linux-anvil-aarch64-cuda11.8:ubi8    # [aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-aarch64"]
-  - quay.io/condaforge/linux-anvil-ppc64le-cuda11.8:ubi8    # [ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le"]
-  # CUDA 11.8 arch: cross-compilation (build != target)
-  - quay.io/condaforge/linux-anvil-x86_64-cuda11.8:ubi8     # [aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64"]
-  - quay.io/condaforge/linux-anvil-x86_64-cuda11.8:ubi8     # [ppc64le and os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64"]
-
-  # CUDA 12 builds on CentOS 7
-  - quay.io/condaforge/linux-anvil-x86_64:cos7      # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-  - quay.io/condaforge/linux-anvil-aarch64:cos7     # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-  - quay.io/condaforge/linux-anvil-ppc64le:cos7     # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "cos7"]
-
-  # CUDA 12 builds on AlmaLinux 8
-  - quay.io/condaforge/linux-anvil-x86_64:alma8     # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-  - quay.io/condaforge/linux-anvil-aarch64:alma8    # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-  - quay.io/condaforge/linux-anvil-ppc64le:alma8    # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") in ("alma8", "ubi8")]
-
-  # CUDA 12 builds on AlmaLinux 9
-  - quay.io/condaforge/linux-anvil-x86_64:alma9     # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
-  - quay.io/condaforge/linux-anvil-aarch64:alma9    # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-aarch64" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
-  - quay.io/condaforge/linux-anvil-ppc64le:alma9    # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le" and os.environ.get("DEFAULT_LINUX_VERSION", "alma9") == "alma9"]
+build_core:
+  - False
 ############################################################
