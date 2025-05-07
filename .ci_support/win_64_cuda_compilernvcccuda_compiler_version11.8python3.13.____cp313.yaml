@@ -1,5 +1,5 @@
 bindings_version:
-- 11.8.6
+- 11.8.7
 build_bindings:
 - 'True'
 c_compiler:
@@ -17,7 +17,7 @@ cuda_compiler_version:
 cxx_compiler:
 - vs2019
 git_tag:
-- v11.8.6
+- v11.8.7
 pin_run_as_build:
   python:
     min_pin: x.x
