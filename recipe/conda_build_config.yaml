@@ -1,8 +1,8 @@
 ######### Configure these for each git tag release #########
 git_tag:
-  - "v11.8.6"
+  - "v11.8.7"
 bindings_version:
-  - "11.8.6"
+  - "11.8.7"
 build_bindings:
   - True
 ############################################################
