@@ -1,6 +1,6 @@
 ######### Configure these for each git tag release #########
 git_tag:
-  - "cuda-core-v0.3.0"
+  - "cuda-core-v0.3.1"
 bindings_version:
   - "12.9.0"
 core_version:
