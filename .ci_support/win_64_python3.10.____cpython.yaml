@@ -5,7 +5,7 @@ build_bindings:
 build_core:
 - 'True'
 c_compiler:
-- vs2019
+- vs2022
 c_stdlib:
 - vs
 channel_sources:
@@ -13,9 +13,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 core_version:
-- 0.3.0
+- 0.3.1
 cxx_compiler:
-- vs2019
+- vs2022
 git_tag:
 - cuda-core-v0.3.0
 numpy:

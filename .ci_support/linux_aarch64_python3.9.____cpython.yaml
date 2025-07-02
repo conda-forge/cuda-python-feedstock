@@ -19,7 +19,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 core_version:
-- 0.3.0
+- 0.3.1
 cxx_compiler:
 - gxx
 cxx_compiler_version:
