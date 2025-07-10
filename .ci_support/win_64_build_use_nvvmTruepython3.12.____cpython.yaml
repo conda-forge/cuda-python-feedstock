@@ -4,6 +4,8 @@ build_bindings:
 - 'False'
 build_core:
 - 'True'
+build_use_nvvm:
+- 'True'
 c_compiler:
 - vs2022
 c_stdlib:
@@ -25,7 +27,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.12.* *_cpython
 python_min:
 - '3.9'
 target_platform:

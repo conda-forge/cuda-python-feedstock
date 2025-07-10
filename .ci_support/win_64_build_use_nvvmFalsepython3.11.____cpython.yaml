@@ -1,0 +1,34 @@
+bindings_version:
+- 12.9.0
+build_bindings:
+- 'False'
+build_core:
+- 'True'
+build_use_nvvm:
+- 'False'
+c_compiler:
+- vs2022
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+core_version:
+- 0.3.1
+cxx_compiler:
+- vs2022
+git_tag:
+- cuda-core-v0.3.1
+numpy:
+- '2'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.11.* *_cpython
+python_min:
+- '3.9'
+target_platform:
+- win-64
