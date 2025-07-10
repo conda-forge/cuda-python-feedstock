@@ -10,3 +10,10 @@ build_bindings:
 build_core:
   - True
 ############################################################
+
+# Produce two builds:
+# 1. CUDA >=12.0,<12.2 and depends on cuda-nvcc-impl
+# 2. CUDA >=12.2,<13.0 and depends on cuda-nvvm
+build_use_nvvm:
+  - False
+  - True
