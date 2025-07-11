@@ -5,7 +5,6 @@
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
 {% set build_bindings = environ.get("build_bindings", False) %}
 {% set build_core = environ.get("build_core", False) %}
-{% set build_use_nvvm = environ.get("build_use_nvvm", True) %}
 
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
@@ -101,7 +100,7 @@ outputs:
         # The run-exports from these dev packages are too tight, so we ignore them.
         # The cuda-python package supports CUDA Enhanced Compatibility through its
         # use of dlopen, so it is compatible with other CUDA minor versions.
-        - cuda-nvcc-impl  # [not build_use_nvvm]
+        - cuda-nvcc-impl
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-nvrtc-dev
@@ -120,10 +119,9 @@ outputs:
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-cudart
-        - cuda-nvcc-impl  # [not build_use_nvvm]
+        - cuda-nvcc-impl
         - cuda-nvrtc
         - cuda-nvrtc-dev
-        - cuda-nvvm  # [build_use_nvvm]
         - cuda-profiler-api
         - cython
         - pip
@@ -132,14 +130,12 @@ outputs:
         - setuptools
       run:
         - python
-        - cuda-version >=12.0,<12.2a0  # [not build_use_nvvm]
-        - cuda-version >=12.2,<13.0a0  # [build_use_nvvm]
+        - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
         # Same for cuda-nvcc-impl / cuda-nvvm.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
-        - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}  # [not build_use_nvvm]
-        - {{ pin_compatible('cuda-nvvm', min_pin='x', max_pin='x') }}  # [build_use_nvvm]
+        - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - libnvjitlink >=12.3
         - pywin32  # [win64]
       run_constrained:
