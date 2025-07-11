@@ -1,5 +1,5 @@
 # Note: For each release please update the variables in conda_build_config.yaml.
-{% set number = 0 %}
+{% set number = 1 %}
 {% set git_tag = environ.get("git_tag") %}
 {% set core_version = environ.get("core_version", "0.0.0") %}
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
@@ -27,7 +27,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 6008bd67a6ec92069ea9a8040367d47c55f8af088d1fd1a127c53aeb3e80da3a
+  sha256: 1fa57a9fad278256cbb3b6cf347d2b258a7f83bba2759257e54c9fabd0b07ce1
 
 build:
   number: 0
@@ -119,8 +119,9 @@ outputs:
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-cudart
-        - cuda-nvrtc-dev
+        - cuda-nvcc-impl
         - cuda-nvrtc
+        - cuda-nvrtc-dev
         - cuda-profiler-api
         - cython
         - pip
@@ -132,9 +133,9 @@ outputs:
         - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
-        # Same for cuda-nvvm.
+        # Same for cuda-nvcc-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
-        - {{ pin_compatible('cuda-nvvm', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - libnvjitlink >=12.3
         - pywin32  # [win64]
       run_constrained:
