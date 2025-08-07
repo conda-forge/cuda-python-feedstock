@@ -144,6 +144,7 @@ outputs:
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
         - libnvjitlink >=12.3,<13
         - pywin32  # [win64]
+        - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
         # cudart. This package is optionally dlopen'd for getting the local cudart
