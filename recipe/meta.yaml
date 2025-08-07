@@ -124,6 +124,7 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
+        - libcufile
         - libcufile-dev
         - cython
         - pip
