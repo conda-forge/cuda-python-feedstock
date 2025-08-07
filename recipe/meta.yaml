@@ -27,7 +27,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 4df6fb7b465ef668d2899337551f4d0ac7ac06e0fd8c80cb56f61d258afd3a3e
+  sha256: 190f65d08bf412bec7235e89d9d30ceaa38ba348e48a0385e791517be7c221f6
 
 build:
   number: 0
@@ -212,10 +212,9 @@ outputs:
         - setuptools
       run:
         - python
-        - cuda-version >=11.2,<13
+        - cuda-version >=11.2,<14
         - numpy
-        # TODO: replace by cuda-bindings once it's ready
-        - cuda-python
+        - cuda-bindings
     test:
       commands:
         - python -c "from cuda.core.experimental import Device"
