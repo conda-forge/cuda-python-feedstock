@@ -61,7 +61,8 @@ outputs:
       run:
         - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
-        - cuda-version >=12.0,<13.0a0
+        - cuda-version >=12.0,<13.0a0  # [not aarch64 or (aarch64 and not cufile_supported)]
+        - cuda-version >=12.2,<13.0a0  # [aarch64 and cufile_supported]
     test:
       requires:
         - python >={{ python_min }}
@@ -125,7 +126,7 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
-        - libcufile      # [linux]
+        - libcufile      # [linux and cufile_supported]
         - libcufile-dev  # [linux]
         - cython
         - pip
@@ -135,13 +136,14 @@ outputs:
       run:
         - python
         - cuda-pathfinder >=1.1.0,<2
-        - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}  # [not aarch64 or (aarch64 and not cufile_supported)]
+        - cuda-version >=12.2,<13.0a0  # [aarch64 and cufile_supported]
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
         # Same for cuda-nvcc-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
-        - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
+        - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux and cufile_supported]
         - libnvjitlink >=12.3,<13
         - pywin32  # [win64]
         - numpy  # [linux]
