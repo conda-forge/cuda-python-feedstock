@@ -1,9 +1,9 @@
 bindings_version:
 - 13.0.0
 build_bindings:
-- 'True'
-build_core:
 - 'False'
+build_core:
+- 'True'
 c_compiler:
 - vs2022
 c_stdlib:
@@ -13,11 +13,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 core_version:
-- 0.3.1
+- 0.3.2
 cxx_compiler:
 - vs2022
 git_tag:
 - v13.0.0
+numpy:
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
