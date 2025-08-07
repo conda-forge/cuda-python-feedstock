@@ -141,7 +141,7 @@ outputs:
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
-        - libnvjitlink >=12.3
+        - libnvjitlink >=12.3,<13
         - pywin32  # [win64]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
