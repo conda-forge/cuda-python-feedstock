@@ -61,7 +61,7 @@ outputs:
       run:
         - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
-        - cuda-version >=12.0,<13.0a0
+        - cuda-version >=13.0,<14.0a0
     test:
       requires:
         - python >={{ python_min }}
@@ -102,6 +102,7 @@ outputs:
         # The cuda-python package supports CUDA Enhanced Compatibility through its
         # use of dlopen, so it is compatible with other CUDA minor versions.
         - cuda-nvcc-impl
+        - cuda-nvvm-impl
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-nvrtc-dev
@@ -125,6 +126,7 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
+        - cuda-nvvm-impl
         - libcufile      # [linux]
         - libcufile-dev  # [linux]
         - cython
@@ -141,8 +143,9 @@ outputs:
         # Same for cuda-nvcc-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('cuda-nvvm-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
-        - libnvjitlink >=12.3,<13
+        - libnvjitlink >=13.0,<14.0a0
         - pywin32  # [win64]
         - numpy  # [linux]
       run_constrained:
@@ -178,6 +181,7 @@ outputs:
         - cuda.bindings.cufile  # [linux]
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
+        - cuda.bindings.nvvm
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
