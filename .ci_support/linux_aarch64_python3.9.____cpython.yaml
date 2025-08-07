@@ -27,7 +27,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 git_tag:
-- v13.0.0
+- cuda-core-v0.3.2
 numpy:
 - '2'
 pin_run_as_build:

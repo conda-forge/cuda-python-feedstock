@@ -17,7 +17,7 @@ core_version:
 cxx_compiler:
 - vs2022
 git_tag:
-- v13.0.0
+- cuda-core-v0.3.2
 numpy:
 - '2'
 pin_run_as_build:
