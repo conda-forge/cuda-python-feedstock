@@ -72,6 +72,7 @@ outputs:
         - cuda.bindings.cufile  # [linux]
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
+        - cuda.bindings.nvvm
       commands:
         - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
@@ -101,7 +102,6 @@ outputs:
         # The run-exports from these dev packages are too tight, so we ignore them.
         # The cuda-python package supports CUDA Enhanced Compatibility through its
         # use of dlopen, so it is compatible with other CUDA minor versions.
-        - cuda-nvcc-impl
         - cuda-nvvm-impl
         - cuda-cudart-dev
         - cuda-cudart-static
@@ -122,11 +122,10 @@ outputs:
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-cudart
-        - cuda-nvcc-impl
+        - cuda-nvvm-impl
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
-        - cuda-nvvm-impl
         - libcufile      # [linux]
         - libcufile-dev  # [linux]
         - cython
@@ -140,9 +139,8 @@ outputs:
         - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
-        # Same for cuda-nvcc-impl.
+        # Same for cuda-nvvm-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
-        - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvvm-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
         - libnvjitlink >=13.0,<14.0a0
@@ -173,8 +171,6 @@ outputs:
         - python -c "import cuda; print(cuda.__version__)"  # TODO: Remove this
       imports:
         - cuda
-        - cuda.cuda
-        - cuda.cudart
         - cuda.bindings
         - cuda.bindings.driver
         - cuda.bindings.runtime
