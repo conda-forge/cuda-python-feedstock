@@ -96,7 +96,7 @@ outputs:
       script_env:
         # Ensure that CUDA includes can be found by the host compiler
         - CUDA_HOME={{ PREFIX ~ subdir }}
-        - LIB=%LIBRARY_LIB%\\x64;%LIB%  # [win64]
+        - LIB={{ PREFIX ~ subdir ~ target_name }};%LIB%  # [win64]
       run_exports:
         - {{ pin_subpackage('cuda-python', min_pin='x', max_pin='x') }}
       ignore_run_exports_from:
