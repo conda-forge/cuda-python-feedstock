@@ -1,5 +1,5 @@
 # Note: For each release please update the variables in conda_build_config.yaml.
-{% set number = 1 %}
+{% set number = 0 %}
 {% set git_tag = environ.get("git_tag") %}
 {% set core_version = environ.get("core_version", "0.0.0") %}
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
@@ -27,7 +27,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 1fa57a9fad278256cbb3b6cf347d2b258a7f83bba2759257e54c9fabd0b07ce1
+  sha256: 9c6c2da8ed59851acbb261b5fac80885d9dd2396a8bea0eba67908b811d7bb50
 
 build:
   number: 0
