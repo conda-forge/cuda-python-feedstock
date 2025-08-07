@@ -69,6 +69,7 @@ outputs:
         - cuda.bindings
         - cuda.bindings.driver
         - cuda.bindings.runtime
+        - cuda.bindings.cufile  # [linux]
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
       commands:
@@ -171,6 +172,11 @@ outputs:
         - cuda.cuda
         - cuda.cudart
         - cuda.bindings
+        - cuda.bindings.driver
+        - cuda.bindings.runtime
+        - cuda.bindings.cufile  # [linux]
+        - cuda.bindings.nvrtc
+        - cuda.bindings.nvjitlink
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
