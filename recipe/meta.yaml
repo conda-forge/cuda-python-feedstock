@@ -104,6 +104,7 @@ outputs:
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-nvrtc-dev
+        - libcufile-dev
     requirements:
       build:
         - {{ compiler('c') }}
@@ -123,6 +124,7 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
+        - libcufile-dev
         - cython
         - pip
         - pyclibrary
@@ -137,6 +139,7 @@ outputs:
         # Same for cuda-nvcc-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}
         - libnvjitlink >=12.3
         - pywin32  # [win64]
       run_constrained:
@@ -166,6 +169,7 @@ outputs:
         - cuda
         - cuda.cuda
         - cuda.cudart
+        - cuda.bindings
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
