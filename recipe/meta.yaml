@@ -130,6 +130,7 @@ outputs:
         - setuptools
       run:
         - python
+        - cuda-pathfinder >=1.1.0,<2
         - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
