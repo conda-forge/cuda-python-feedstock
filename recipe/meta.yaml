@@ -104,7 +104,7 @@ outputs:
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-nvrtc-dev
-        - libcufile-dev
+        - libcufile-dev  # [linux]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -124,8 +124,8 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
-        - libcufile
-        - libcufile-dev
+        - libcufile      # [linux]
+        - libcufile-dev  # [linux]
         - cython
         - pip
         - pyclibrary
@@ -140,7 +140,7 @@ outputs:
         # Same for cuda-nvcc-impl.
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
-        - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
         - libnvjitlink >=12.3
         - pywin32  # [win64]
       run_constrained:
