@@ -214,8 +214,7 @@ outputs:
         - python
         - cuda-version >=11.2,<14
         - numpy
-        # TODO: replace by cuda-bindings once it's ready
-        - cuda-python
+        - cuda-bindings
     test:
       commands:
         - python -c "from cuda.core.experimental import Device"
