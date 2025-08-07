@@ -1,5 +1,5 @@
 bindings_version:
-- 12.9.1
+- 13.0.0
 build_bindings:
 - 'True'
 build_core:
@@ -17,7 +17,7 @@ core_version:
 cxx_compiler:
 - vs2022
 git_tag:
-- v12.9.1
+- v13.0.0
 pin_run_as_build:
   python:
     min_pin: x.x
