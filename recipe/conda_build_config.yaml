@@ -4,9 +4,9 @@ git_tag:
 bindings_version:
   - "13.0.0"
 core_version:
-  - "0.3.1"
+  - "0.3.2"
 build_bindings:
-  - True
-build_core:
   - False
+build_core:
+  - True
 ############################################################
