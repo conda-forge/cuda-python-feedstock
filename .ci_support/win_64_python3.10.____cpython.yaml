@@ -1,9 +1,9 @@
 bindings_version:
-- 13.0.0
+- 13.0.1
 build_bindings:
-- 'False'
-build_core:
 - 'True'
+build_core:
+- 'False'
 c_compiler:
 - vs2022
 c_stdlib:
@@ -17,9 +17,7 @@ core_version:
 cxx_compiler:
 - vs2022
 git_tag:
-- cuda-core-v0.3.2
-numpy:
-- '2'
+- v13.0.1
 pin_run_as_build:
   python:
     min_pin: x.x
