@@ -30,7 +30,7 @@ source:
   sha256: 7dda5ada869e6e4e35d00120d10f3c7e8fa1600a0324308c68c3d9e0526b0809
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py < 39 or ppc64le or osx]
 
 # Have certain top-level requirements so conda-smithy can render the correct variants
