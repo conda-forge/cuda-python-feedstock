@@ -51,7 +51,7 @@ outputs:
     script: build_output.bat  # [win]
     build:
       noarch: python
-      number: {{ number|int + 1 }}
+      number: {{ number }}
       skip: true  # [not build_bindings or not linux64]
     requirements:
       host:
