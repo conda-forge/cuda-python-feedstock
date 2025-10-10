@@ -8,100 +8,92 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_python3.10.____cpython:
-        CONFIG: linux_64_python3.10.____cpython
+      linux_64_is_freethreadingFalsepython3.10.____cpython:
+        CONFIG: linux_64_is_freethreadingFalsepython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.11.____cpython:
-        CONFIG: linux_64_python3.11.____cpython
+      linux_64_is_freethreadingFalsepython3.11.____cpython:
+        CONFIG: linux_64_is_freethreadingFalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.12.____cpython:
-        CONFIG: linux_64_python3.12.____cpython
+      linux_64_is_freethreadingFalsepython3.12.____cpython:
+        CONFIG: linux_64_is_freethreadingFalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.13.____cp313:
-        CONFIG: linux_64_python3.13.____cp313
+      linux_64_is_freethreadingFalsepython3.13.____cp313:
+        CONFIG: linux_64_is_freethreadingFalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.13.____cp313t:
-        CONFIG: linux_64_python3.13.____cp313t
+      linux_64_is_freethreadingFalsepython3.14.____cp314:
+        CONFIG: linux_64_is_freethreadingFalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.14.____cp314:
-        CONFIG: linux_64_python3.14.____cp314
+      linux_64_is_freethreadingFalsepython3.9.____cpython:
+        CONFIG: linux_64_is_freethreadingFalsepython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.14.____cp314t:
-        CONFIG: linux_64_python3.14.____cp314t
+      linux_64_is_freethreadingTruepython3.13.____cp313t:
+        CONFIG: linux_64_is_freethreadingTruepython3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_python3.9.____cpython:
-        CONFIG: linux_64_python3.9.____cpython
+      linux_64_is_freethreadingTruepython3.14.____cp314t:
+        CONFIG: linux_64_is_freethreadingTruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.10.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.10.____cpython
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.10.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.11.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.11.____cpython
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.11.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.12.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.12.____cpython
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.12.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.13.____cp313:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.13.____cp313
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.13.____cp313:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.13.____cp313t:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.13.____cp313t
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.14.____cp314:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.14.____cp314:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.14.____cp314
+      linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.9.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.14.____cp314t:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.14.____cp314t
+      linux_aarch64_cufile_supportedFalseis_freethreadingTruepython3.13.____cp313t:
+        CONFIG: linux_aarch64_cufile_supportedFalseis_freethreadingTruepython3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedFalsepython3.9.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedFalsepython3.9.____cpython
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.10.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.10.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.10.____cpython
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.11.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.11.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.11.____cpython
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.12.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.12.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.12.____cpython
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.13.____cp313:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.13.____cp313:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.13.____cp313
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.14.____cp314:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.13.____cp313t:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.13.____cp313t
+      linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.9.____cpython:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.14.____cp314:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.14.____cp314
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.14.____cp314t:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.14.____cp314t
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cufile_supportedTruepython3.9.____cpython:
-        CONFIG: linux_aarch64_cufile_supportedTruepython3.9.____cpython
+      linux_aarch64_cufile_supportedTrueis_freethreadingTruepython3.13.____cp313t:
+        CONFIG: linux_aarch64_cufile_supportedTrueis_freethreadingTruepython3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
   timeoutInMinutes: 360

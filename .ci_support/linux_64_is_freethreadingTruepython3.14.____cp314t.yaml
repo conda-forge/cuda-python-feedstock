@@ -19,7 +19,7 @@ channel_targets:
 core_version:
 - 0.3.1
 cufile_supported:
-- 'False'
+- 'True'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -28,18 +28,20 @@ docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 git_tag:
 - v12.9.3
-numpy:
-- '2'
+is_freethreading:
+- 'True'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.13.* *_cp313
+- 3.14.* *_cp314t
 python_min:
 - '3.9'
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - is_freethreading
