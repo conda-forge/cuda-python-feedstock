@@ -5,6 +5,7 @@
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
 {% set build_bindings = environ.get("build_bindings", False) %}
 {% set build_core = environ.get("build_core", False) %}
+{% set is_freethreading = environ.get("is_freethreading", False) %}
 
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
