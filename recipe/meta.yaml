@@ -147,7 +147,6 @@ outputs:
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux and cufile_supported]
         - libnvjitlink >=12.3,<13
-        - pywin32  # [win64]
         - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
@@ -158,6 +157,8 @@ outputs:
         - {{ pin_subpackage('cuda-python', max_pin='x.x') }}
     test:
       requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - cuda-nvcc
         - cuda-nvrtc-dev
         - cuda-profiler-api
@@ -168,7 +169,7 @@ outputs:
       commands:
         - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
         - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
-        - cythonize -i -3 test_cimport.pyx
+        - cythonize -i -3 -Xfreethreading_compatible=True test_cimport.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
         - python -c "import cuda; print(cuda.__version__)"  # TODO: Remove this
