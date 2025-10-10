@@ -234,9 +234,7 @@ outputs:
         - {{ pin_compatible("cuda-version", min_pin="x", max_pin="x") }}
     test:
       commands:
-        - python -c "from cuda.core.experimental import Device"
-        - python -c "from cuda.core.experimental import Buffer"
-        - python -c "from cuda.core.experimental import utils"
+        - python -c "from cuda.core.experimental import Device, Buffer, utils"
     about:
       home: https://nvidia.github.io/cuda-python/cuda-core
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
