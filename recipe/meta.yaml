@@ -28,7 +28,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 984197c834016a31f0da6f7052efbf191105e593ff469ff24bbf801a7de47cba
+  sha256: 47a6181f1a8fa1db2df31251c0bb654558b3eddf47c41964bfa39965a46c7b41
 
 build:
   number: 0
@@ -199,13 +199,22 @@ outputs:
     version: {{ core_ver }}
     script: build_output.sh   # [linux]
     script: build_output.bat  # [win]
+    script_env:
+      - CUDA_PATH={{ BUILD_PREFIX ~ subdir }}
     build:
       number: {{ number }}
-      skip: true  # [not build_core]
+      string: cuda{{ cuda_compiler_version | replace('.', '') }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
+      skip: true  # [not build_core or cuda_compiler_version not in ("12.9", "13.0")]
+      ignore_run_exports_from:
+        - {{ compiler('cuda') }}
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        # We don't actually need NVCC. But this is conda-forge's way for having a CUDA version
+        # defined at build time, without us hacking cbc.yaml. Also, it brings in the headers
+        # that we need.
+        - {{ compiler('cuda') }}
         - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
@@ -215,14 +224,17 @@ outputs:
         - pip
         - python
         - setuptools
+        - cuda-bindings
+        - cuda-version {{ cuda_compiler_version }}
       run:
         - python
-        - cuda-version >=11.2,<14
         - numpy
-        - cuda-bindings
+        - {{ pin_compatible("cuda-bindings"), min_pin="x", max_pin="x" }}
+        - {{ pin_compatible("cuda-version"), min_pin="x", max_pin="x" }}
     test:
       commands:
         - python -c "from cuda.core.experimental import Device"
+        - python -c "from cuda.core.experimental import Buffer"
         - python -c "from cuda.core.experimental import utils"
     about:
       home: https://nvidia.github.io/cuda-python/cuda-core
