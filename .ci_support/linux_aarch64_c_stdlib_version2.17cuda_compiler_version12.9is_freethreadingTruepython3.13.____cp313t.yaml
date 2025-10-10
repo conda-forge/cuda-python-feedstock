@@ -29,7 +29,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 git_tag:
-- v13.0.2
+- cuda-core-v0.4.0
 is_freethreading:
 - 'True'
 numpy:
