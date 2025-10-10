@@ -5,6 +5,7 @@
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
 {% set build_bindings = environ.get("build_bindings", False) %}
 {% set build_core = environ.get("build_core", False) %}
+{% set is_freethreading = environ.get("is_freethreading", False) %}
 
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
@@ -27,7 +28,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 7dda5ada869e6e4e35d00120d10f3c7e8fa1600a0324308c68c3d9e0526b0809
+  sha256: 984197c834016a31f0da6f7052efbf191105e593ff469ff24bbf801a7de47cba
 
 build:
   number: 0
@@ -51,7 +52,7 @@ outputs:
     script: build_output.bat  # [win]
     build:
       noarch: python
-      number: {{ number|int + 1 }}
+      number: {{ number }}
       skip: true  # [not build_bindings or not linux64]
     requirements:
       host:
@@ -92,7 +93,8 @@ outputs:
     script: build_output.bat  # [win]
     build:
       number: {{ number }}
-      skip: true  # [not build_bindings]
+      # work around https://github.com/conda-forge/cross-python-feedstock/issues/100
+      skip: true  # [not build_bindings or (aarch64 and py==314 and is_freethreading)]
       script_env:
         # Ensure that CUDA includes can be found by the host compiler
         - CUDA_HOME={{ PREFIX ~ subdir }}
@@ -145,7 +147,6 @@ outputs:
         - {{ pin_compatible('cuda-nvvm-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
         - libnvjitlink >=13.0,<14.0a0
-        - pywin32  # [win64]
         - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
@@ -156,17 +157,21 @@ outputs:
         - {{ pin_subpackage('cuda-python', max_pin='x.x') }}
     test:
       requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - cuda-nvcc
         - cuda-nvrtc-dev
         - cuda-profiler-api
         - cython
-        - setuptools
+        - pip
       files:
         - test_cimport.pyx
       commands:
         - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
         - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
-        - cythonize -i -3 test_cimport.pyx
+        # workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399 
+        - pip install setuptools
+        - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
       imports:

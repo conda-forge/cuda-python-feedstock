@@ -1,5 +1,5 @@
 bindings_version:
-- 13.0.1
+- 13.0.2
 build_bindings:
 - 'True'
 build_core:
@@ -12,8 +12,6 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -27,9 +25,9 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 git_tag:
-- v13.0.1
-numpy:
-- '2'
+- v13.0.2
+is_freethreading:
+- 'False'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -39,7 +37,9 @@ python:
 python_min:
 - '3.9'
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - is_freethreading
