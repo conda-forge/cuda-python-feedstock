@@ -200,12 +200,12 @@ outputs:
     version: {{ core_ver }}
     script: build_output.sh   # [linux]
     script: build_output.bat  # [win]
-    script_env:
-      - CUDA_PATH={{ BUILD_PREFIX ~ subdir }}
     build:
       number: {{ number }}
       string: cuda{{ cuda_compiler_version | replace('.', '') }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
       skip: true  # [not build_core or cuda_compiler_version not in ("12.9", "13.0")]
+      script_env:
+        - CUDA_PATH={{ BUILD_PREFIX ~ subdir }}
       ignore_run_exports_from:
         - {{ compiler('cuda') }}
     requirements:
