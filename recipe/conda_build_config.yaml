@@ -12,6 +12,14 @@ build_core:
 
 ############################################################
 
+# This is temporary and will go away after conda-forge/cuda-python-feedstock#145
+# is resolved. Only turn this on when building cuda.core.
+cuda_major_version:
+  - "12"
+  - "13"
+
+############################################################
+
 python:
   - 3.9.* *_cpython
   - 3.10.* *_cpython

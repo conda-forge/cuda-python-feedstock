@@ -40,7 +40,6 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
-    - {{ compiler('cuda') }}  # [build_core]
   host:
     - python
 
@@ -202,20 +201,14 @@ outputs:
     script: build_output.bat  # [win]
     build:
       number: {{ number }}
-      string: cuda{{ cuda_compiler_version | replace('.', '') }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
-      skip: true  # [not build_core or cuda_compiler_version not in ("12.9", "13.0")]
+      string: cuda{{ cuda_major_version }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      skip: true  # [not build_core]
       script_env:
-        - CUDA_PATH={{ BUILD_PREFIX ~ subdir }}
-      ignore_run_exports_from:
-        - {{ compiler('cuda') }}
+        - CUDA_PATH={{ PREFIX ~ subdir }}
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        # We don't actually need NVCC. But this is conda-forge's way for having a CUDA version
-        # defined at render time, without us hacking cbc.yaml. Also, it brings in the headers
-        # that we need.
-        - {{ compiler('cuda') }}
         - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
@@ -225,8 +218,10 @@ outputs:
         - pip
         - python
         - setuptools
-        - cuda-bindings {{ cuda_compiler_version }}
-        - cuda-version {{ cuda_compiler_version }}
+        - cuda-cudart-dev
+        - cuda-profiler-api
+        - cuda-bindings {{ cuda_major_version }}
+        - cuda-version {{ cuda_major_version }}
       run:
         - python
         - numpy
