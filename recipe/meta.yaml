@@ -220,12 +220,12 @@ outputs:
         - setuptools
         - cuda-cudart-dev
         - cuda-profiler-api
-        - cuda-bindings {{ cuda_major_version }}
-        - cuda-version {{ cuda_major_version }}
+        - cuda-bindings {{ cuda_major_version }}.*
+        - cuda-version {{ cuda_major_version }}.*
       run:
         - python
         - numpy
-        - {{ pin_compatible("cuda-bindings", min_pin="x", max_pin="x") }}
+        - cuda-bindings {{ cuda_major_version }}.*
         - {{ pin_compatible("cuda-version", min_pin="x", max_pin="x") }}
     test:
       commands:
