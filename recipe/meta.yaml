@@ -246,6 +246,7 @@ about:
 extra:
   feedstock-name: cuda-python
   recipe-maintainers:
+    - cpcloud
     - bdice
     - jakirkham
     - leofang
