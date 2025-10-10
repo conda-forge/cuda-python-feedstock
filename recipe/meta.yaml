@@ -156,6 +156,8 @@ outputs:
         - {{ pin_subpackage('cuda-python', max_pin='x.x') }}
     test:
       requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - cuda-nvcc
         - cuda-nvrtc-dev
         - cuda-profiler-api
@@ -166,7 +168,7 @@ outputs:
       commands:
         - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
         - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
-        - cythonize -i -3 test_cimport.pyx
+        - cythonize -i -3 -Xfreethreading_compatible=True test_cimport.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
       imports:
