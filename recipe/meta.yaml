@@ -229,8 +229,8 @@ outputs:
       run:
         - python
         - numpy
-        - {{ pin_compatible("cuda-bindings"), min_pin="x", max_pin="x" }}
-        - {{ pin_compatible("cuda-version"), min_pin="x", max_pin="x" }}
+        - {{ pin_compatible("cuda-bindings", min_pin="x", max_pin="x") }}
+        - {{ pin_compatible("cuda-version", min_pin="x", max_pin="x") }}
     test:
       commands:
         - python -c "from cuda.core.experimental import Device"
