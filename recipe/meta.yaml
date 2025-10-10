@@ -1,10 +1,11 @@
 # Note: For each release please update the variables in conda_build_config.yaml.
-{% set number = 1 %}
+{% set number = 0 %}
 {% set git_tag = environ.get("git_tag") %}
 {% set core_version = environ.get("core_version", "0.0.0") %}
 {% set bindings_version = environ.get("bindings_version", "0.0.0") %}
 {% set build_bindings = environ.get("build_bindings", False) %}
 {% set build_core = environ.get("build_core", False) %}
+{% set is_freethreading = environ.get("is_freethreading", False) %}
 
 {% set core_major_version = core_version.split(".")[0]|int %}
 {% set core_minor_version = core_version.split(".")[1]|int %}
@@ -27,7 +28,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/{{ git_tag }}/cuda-python-{{ git_tag }}.tar.gz
-  sha256: 8b86f28ebc3d9036f8643073b5696d8e56419241ff9c25a7417de8b998cb8c20
+  sha256: 02f7bd0dc5af3b2d0f1d224adc9681bf6738cafd2e332f6095f5bf8daeb07e3f
 
 build:
   number: 0
@@ -51,7 +52,7 @@ outputs:
     script: build_output.bat  # [win]
     build:
       noarch: python
-      number: {{ number|int + 1 }}
+      number: {{ number }}
       skip: true  # [not build_bindings or not linux64]
     requirements:
       host:
@@ -93,7 +94,8 @@ outputs:
     script: build_output.bat  # [win]
     build:
       number: {{ number }}
-      skip: true  # [not build_bindings]
+      # work around https://github.com/conda-forge/cross-python-feedstock/issues/100
+      skip: true  # [not build_bindings or (aarch64 and py==314 and is_freethreading)]
       script_env:
         # Ensure that CUDA includes can be found by the host compiler
         - CUDA_HOME={{ PREFIX ~ subdir }}
@@ -147,7 +149,6 @@ outputs:
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux and cufile_supported]
         - libnvjitlink >=12.3,<13
-        - pywin32  # [win64]
         - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
@@ -162,13 +163,15 @@ outputs:
         - cuda-nvrtc-dev
         - cuda-profiler-api
         - cython
-        - setuptools
+        - pip
       files:
         - test_cimport.pyx
       commands:
         - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
         - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
-        - cythonize -i -3 test_cimport.pyx
+        # workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399 
+        - pip install setuptools
+        - cythonize -i -3 -Xfreethreading_compatible=True test_cimport.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
         - python -c "import cuda; print(cuda.__version__)"  # TODO: Remove this
