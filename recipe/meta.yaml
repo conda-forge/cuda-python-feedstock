@@ -225,7 +225,7 @@ outputs:
         - pip
         - python
         - setuptools
-        - cuda-bindings
+        - cuda-bindings {{ cuda_compiler_version }}
         - cuda-version {{ cuda_compiler_version }}
       run:
         - python
