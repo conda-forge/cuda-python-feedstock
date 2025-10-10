@@ -161,12 +161,14 @@ outputs:
         - cuda-nvrtc-dev
         - cuda-profiler-api
         - cython
-        - setuptools
+        - pip
       files:
         - test_cimport.pyx
       commands:
         - export C_INCLUDE_PATH="$CONDA_PREFIX/{{ subdir }}/include"  # [linux]
         - set "CL=%CL% /I%CONDA_PREFIX%\{{ subdir }}\include"         # [win]
+        # workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399 
+        - pip install setuptools
         - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
