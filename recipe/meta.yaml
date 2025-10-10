@@ -213,7 +213,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         # We don't actually need NVCC. But this is conda-forge's way for having a CUDA version
-        # defined at build time, without us hacking cbc.yaml. Also, it brings in the headers
+        # defined at render time, without us hacking cbc.yaml. Also, it brings in the headers
         # that we need.
         - {{ compiler('cuda') }}
         - {{ stdlib('c') }}
