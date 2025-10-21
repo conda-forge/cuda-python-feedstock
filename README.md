@@ -127,101 +127,52 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.10.____cpython</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.10.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.11.____cpython</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.12.____cpython</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.13.____cp313</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.14.____cp314</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.14.____cp314</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.14.____cp314" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.14.____cp314" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.9.____cpython</td>
+              <td>linux_aarch64_is_freethreadingFalsepython3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingFalsepython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingFalsepython3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cufile_supportedFalseis_freethreadingTruepython3.13.____cp313t</td>
+              <td>linux_aarch64_is_freethreadingTruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedFalseis_freethreadingTruepython3.13.____cp313t" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.14.____cp314</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.14.____cp314" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingFalsepython3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cufile_supportedTrueis_freethreadingTruepython3.13.____cp313t</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13969&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cufile_supportedTrueis_freethreadingTruepython3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-python-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingTruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -411,6 +362,7 @@ Feedstock Maintainers
 =====================
 
 * [@bdice](https://github.com/bdice/)
+* [@cpcloud](https://github.com/cpcloud/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@kkraus14](https://github.com/kkraus14/)
 * [@leofang](https://github.com/leofang/)
