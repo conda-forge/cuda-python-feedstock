@@ -38,7 +38,7 @@ outputs:
 
   - name: cuda-python
     version: {{ version }}
-    script: build_output.sh   # [linux]
+    script: build_output.sh  # [linux]
     script: build_output.bat  # [win]
     build:
       noarch: python
@@ -79,7 +79,7 @@ outputs:
 
   - name: cuda-bindings
     version: {{ version }}
-    script: build_output.sh   # [linux]
+    script: build_output.sh  # [linux]
     script: build_output.bat  # [win]
     build:
       number: {{ number }}
