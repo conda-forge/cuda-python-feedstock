@@ -1,15 +1,3 @@
-######### Configure these for each git tag release #########
-git_tag:
-  - "v13.0.2"
-bindings_version:
-  - "13.0.2"
-core_version:
-  - "0.3.2"
-build_bindings:
-  - True
-build_core:
-  - False
-############################################################
 python:
   - 3.9.* *_cpython
   - 3.10.* *_cpython
