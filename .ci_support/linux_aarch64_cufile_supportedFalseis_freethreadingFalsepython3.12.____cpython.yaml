@@ -10,6 +10,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cufile_supported:
+- 'False'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -25,7 +27,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.12.* *_cpython
 python_min:
 - '3.9'
 target_platform:
