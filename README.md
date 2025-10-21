@@ -362,6 +362,7 @@ Feedstock Maintainers
 =====================
 
 * [@bdice](https://github.com/bdice/)
+* [@cpcloud](https://github.com/cpcloud/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@kkraus14](https://github.com/kkraus14/)
 * [@leofang](https://github.com/leofang/)
@@ -370,7 +371,4 @@ Feedstock Maintainers
 * [@oleksandr-pavlyk](https://github.com/oleksandr-pavlyk/)
 * [@vyasr](https://github.com/vyasr/)
 * [@vzhurba01](https://github.com/vzhurba01/)
-
-
-<!-- dummy commit to enable rerendering -->
 
