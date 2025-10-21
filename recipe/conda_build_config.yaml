@@ -1,3 +1,11 @@
+# libcufile only exists on ARM for CUDA 12.2+. We split into two ARM packages
+# with/without libcufile support.
+cufile_supported:
+  - True
+  - False  # [aarch64]
+
+############################################################
+
 python:
   - 3.9.* *_cpython
   - 3.10.* *_cpython
