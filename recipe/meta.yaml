@@ -1,5 +1,7 @@
 {% set number = 0 %}
 {% set version = "13.0.3" %}
+{% set sha256 = "0e32bf4dd9745c07f5d04c2cc6a8cd382f5ce544a28b26465bd7bc7811b8638d" %}
+
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
 {% set bindings_minor_version = version.split(".")[1]|int %}
@@ -17,7 +19,7 @@ package:
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/v{{ version }}/cuda-python-v{{ version }}.tar.gz
-  sha256: 0e32bf4dd9745c07f5d04c2cc6a8cd382f5ce544a28b26465bd7bc7811b8638d
+  sha256: {{ sha256 }}
 
 build:
   number: 0
