@@ -1,4 +1,4 @@
-{% set number = 0 %}
+{% set number = 1 %}
 {% set version = "12.9.4" %}
 {% set sha256 = "e08eac307f3f17bf163ffc9d1a493bb93c10e94948a4117b7e33d76452ae0b79" %}
 
@@ -85,8 +85,6 @@ outputs:
     script: build_output.bat  # [win]
     build:
       number: {{ number }}
-      # work around https://github.com/conda-forge/cross-python-feedstock/issues/100
-      skip: true  # [aarch64 and py==314 and is_freethreading]
       script_env:
         # Ensure that CUDA includes can be found by the host compiler
         - CUDA_HOME={{ PREFIX ~ subdir }}
