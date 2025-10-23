@@ -4,12 +4,10 @@ python:
   - 3.11.* *_cpython
   - 3.12.* *_cpython
   - 3.13.* *_cp313
-  - 3.13.* *_cp313t
   - 3.14.* *_cp314
   - 3.14.* *_cp314t
 is_python_min:
   - True
-  - False
   - False
   - False
   - False
@@ -22,11 +20,9 @@ is_freethreading:
   - False
   - False
   - False
-  - True
   - False
   - True
 is_abi3:
-  - False
   - False
   - False
   - False
