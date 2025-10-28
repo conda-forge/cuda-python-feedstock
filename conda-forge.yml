@@ -5,6 +5,8 @@ azure:
 bot:
   abi_migration_branches:
   - '12.9'
+  version_updates:
+    allowed_tag_globs: 'v*'
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
