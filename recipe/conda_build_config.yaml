@@ -1,5 +1,4 @@
 python:
-  - 3.9.* *_cpython
   - 3.10.* *_cpython
   - 3.11.* *_cpython
   - 3.12.* *_cpython
@@ -15,9 +14,7 @@ is_python_min:
   - False
   - False
   - False
-  - False
 is_freethreading:
-  - False
   - False
   - False
   - False
@@ -33,6 +30,5 @@ is_abi3:
   - False
   - False
   - False
-  - False
 python_min:
-  - "3.9"
+  - "3.10"
