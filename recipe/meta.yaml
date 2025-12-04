@@ -1,6 +1,6 @@
 {% set number = 1 %}
-{% set version = "13.0.3" %}
-{% set sha256 = "0e32bf4dd9745c07f5d04c2cc6a8cd382f5ce544a28b26465bd7bc7811b8638d" %}
+{% set version = "13.1.0" %}
+{% set sha256 = "e035abd65289f51114a55b7399764a8cfc17beb59e69493c54129294781b1d6e" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
@@ -38,7 +38,7 @@ outputs:
 
   - name: cuda-python
     version: {{ version }}
-    script: build_output.sh   # [linux]
+    script: build_output.sh  # [linux]
     script: build_output.bat  # [win]
     build:
       noarch: python
@@ -79,7 +79,7 @@ outputs:
 
   - name: cuda-bindings
     version: {{ version }}
-    script: build_output.sh   # [linux]
+    script: build_output.sh  # [linux]
     script: build_output.bat  # [win]
     build:
       number: {{ number }}

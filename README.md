@@ -376,9 +376,7 @@ Feedstock Maintainers
 * [@m3vaz](https://github.com/m3vaz/)
 * [@mmccarty](https://github.com/mmccarty/)
 * [@oleksandr-pavlyk](https://github.com/oleksandr-pavlyk/)
+* [@rparolin](https://github.com/rparolin/)
 * [@vyasr](https://github.com/vyasr/)
 * [@vzhurba01](https://github.com/vzhurba01/)
-
-
-<!-- dummy commit to enable rerendering -->
 
