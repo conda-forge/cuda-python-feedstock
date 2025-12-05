@@ -195,6 +195,7 @@ about:
 extra:
   feedstock-name: cuda-python
   recipe-maintainers:
+    - rwgk
     - rparolin
     - cpcloud
     - bdice
