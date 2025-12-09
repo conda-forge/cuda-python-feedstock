@@ -1,6 +1,6 @@
 {% set number = 1 %}
-{% set version = "13.1.0" %}
-{% set sha256 = "e035abd65289f51114a55b7399764a8cfc17beb59e69493c54129294781b1d6e" %}
+{% set version = "12.9.4" %}
+{% set sha256 = "e08eac307f3f17bf163ffc9d1a493bb93c10e94948a4117b7e33d76452ae0b79" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
