@@ -133,7 +133,6 @@ outputs:
         - {{ pin_compatible('cuda-nvvm-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux]
         - libnvjitlink >=13.0,<14.0a0
-        - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
         # cudart. This package is optionally dlopen'd for getting the local cudart
@@ -150,6 +149,7 @@ outputs:
         - cuda-profiler-api
         - cython
         - pip
+        - numpy
       files:
         - test_cimport.pyx
       commands:
