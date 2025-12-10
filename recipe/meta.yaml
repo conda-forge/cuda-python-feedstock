@@ -169,6 +169,7 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
+        - cuda.bindings._nvml
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
