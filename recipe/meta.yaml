@@ -56,6 +56,7 @@ outputs:
     test:
       requires:
         - python >={{ python_min }}
+        - numpy
       imports:
         - cuda.bindings
         - cuda.bindings.driver
@@ -64,6 +65,7 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
+        - cuda.bindings._nvml
       commands:
         - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
