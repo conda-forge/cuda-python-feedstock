@@ -10,6 +10,8 @@ cxx_compiler:
 - vs2022
 is_freethreading:
 - true
+numpy:
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
