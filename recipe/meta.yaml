@@ -1,6 +1,6 @@
-{% set number = 1 %}
-{% set version = "12.9.4" %}
-{% set sha256 = "e08eac307f3f17bf163ffc9d1a493bb93c10e94948a4117b7e33d76452ae0b79" %}
+{% set number = 0 %}
+{% set version = "12.9.5" %}
+{% set sha256 = "5210b063a74741abb86eb82f2d40e075be4e85c755208f4c92dd7cb86647415f" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
@@ -58,6 +58,7 @@ outputs:
     test:
       requires:
         - python >={{ python_min }}
+        - numpy
       imports:
         - cuda.bindings
         - cuda.bindings.driver
@@ -66,6 +67,7 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
+        - cuda.bindings._nvml
       commands:
         - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
@@ -136,7 +138,6 @@ outputs:
         - {{ pin_compatible('cuda-nvcc-impl', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcufile', min_pin='x', max_pin='x') }}  # [linux and cufile_supported]
         - libnvjitlink >=12.3,<13
-        - numpy  # [linux]
       run_constrained:
         # cuda-cudart is not a hard dependency because cuda-python statically links to
         # cudart. This package is optionally dlopen'd for getting the local cudart
@@ -151,6 +152,7 @@ outputs:
         - cuda-profiler-api
         - cython
         - pip
+        - numpy
       files:
         - test_cimport.pyx
       commands:
@@ -172,6 +174,7 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
+        - cuda.bindings._nvml
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
