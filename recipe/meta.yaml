@@ -1,4 +1,4 @@
-{% set number = 1 %}
+{% set number = 0 %}
 {% set version = "13.2.0" %}
 {% set sha256 = "6899b7684ccaf3249d521cc092768baeae390780375bb115bcd80350b65b1dff" %}
 
@@ -65,7 +65,8 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
-        - cuda.bindings._nvml
+        - cuda.bindings.nvml
+        - cuda.bindings.nvfatbin
       commands:
         - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
@@ -171,7 +172,8 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
-        - cuda.bindings._nvml
+        - cuda.bindings.nvml
+        - cuda.bindings.nvfatbin
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
