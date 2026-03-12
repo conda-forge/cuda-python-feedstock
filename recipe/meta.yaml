@@ -1,6 +1,6 @@
 {% set number = 0 %}
-{% set version = "12.9.5" %}
-{% set sha256 = "5210b063a74741abb86eb82f2d40e075be4e85c755208f4c92dd7cb86647415f" %}
+{% set version = "12.9.6" %}
+{% set sha256 = "c48d81e7ee0755c571c82b5c06614b8c4a40e8b5976536a0967705253ae45f48" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
@@ -49,6 +49,7 @@ outputs:
         - python {{ python_min }}.*
         - pip
         - setuptools
+        - setuptools-scm >=8
       run:
         - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
@@ -67,7 +68,8 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
-        - cuda.bindings._nvml
+        - cuda.bindings.nvml
+        - cuda.bindings.nvfatbin
       commands:
         - python -c "import importlib.metadata; importlib.metadata.version('cuda-python')"
     about:
@@ -125,6 +127,7 @@ outputs:
         - pyclibrary
         - python
         - setuptools
+        - setuptools-scm >=8
       run:
         - python
         - cuda-pathfinder >=1.1.0,<2
@@ -174,7 +177,8 @@ outputs:
         - cuda.bindings.nvrtc
         - cuda.bindings.nvjitlink
         - cuda.bindings.nvvm
-        - cuda.bindings._nvml
+        - cuda.bindings.nvml
+        - cuda.bindings.nvfatbin
     about:
       home: https://nvidia.github.io/cuda-python/cuda-bindings
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
