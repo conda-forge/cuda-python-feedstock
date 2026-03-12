@@ -49,6 +49,7 @@ outputs:
         - python {{ python_min }}.*
         - pip
         - setuptools
+        - setuptools-scm >=8
       run:
         - python >={{ python_min }}
         - {{ pin_subpackage('cuda-bindings', max_pin='x.x') }}
