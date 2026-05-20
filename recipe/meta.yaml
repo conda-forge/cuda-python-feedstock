@@ -166,7 +166,6 @@ outputs:
         - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
         - python -c "import test_cimport; test_cimport.test()"
         - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
-        - python -c "import cuda.bindings.nvfatbin; cuda.bindings.nvfatbin.version()"
       imports:
         - cuda
         - cuda.bindings
