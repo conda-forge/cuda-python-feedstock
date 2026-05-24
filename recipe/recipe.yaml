@@ -67,8 +67,6 @@ outputs:
             - cuda.bindings.nvvm
             - cuda.bindings.nvfatbin
           pip_check: false
-          # TODO: add support for v1
-          # python_version: >=${{ python_min }}
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
       license_file: cuda_python/LICENSE
@@ -113,6 +111,7 @@ outputs:
           then:
           - libcufile
           - libcufile-dev
+        - libnvfatbin
         - cython
         - pip
         - pyclibrary
@@ -128,23 +127,30 @@ outputs:
         # Same for cuda-nvvm-impl.
         - ${{ pin_compatible('cuda-nvrtc', lower_bound='x', upper_bound='x') }}
         - ${{ pin_compatible('cuda-nvvm-impl', lower_bound='x', upper_bound='x') }}
-        # TODO: add support for v1
-        # - skip: false linux
-          # then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
+        - if: linux
+          then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
+        # FIXME: error "following package is not part of the solution: libnvfatbin"
         # - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
         - libnvjitlink >=13.0,<14.0a0
       ignore_run_exports:
         from_package:
+          # The run-exports from these dev packages are too tight, so we ignore them.
+          # The cuda-python package supports CUDA Enhanced Compatibility through its
+          # use of dlopen, so it is compatible with other CUDA minor versions.
           - cuda-nvvm-impl
           - cuda-cudart-dev
           - cuda-cudart-static
           - cuda-nvrtc-dev
-          # TODO: add support for v1
-          # - skip: false linux
-            # then: libcufile-dev
+          - if: linux
+            then: libcufile-dev
       run_constraints:
+        # cuda-cudart is not a hard dependency because cuda-python statically links to
+        # cudart. This package is optionally dlopen'd for getting the local cudart
+        # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
+        # of cuda-cudart-dev and instead allow a looser pinning here.
         - ${{ pin_compatible('cuda-cudart', lower_bound='x', upper_bound='x') }}
-        # Rattler-build thinks this introduces circular dependency
+        # Rattler-build views this as circular dependency
+        # TODO: should this be removed outright
         # - ${{ pin_subpackage('cuda-python', upper_bound='x.x') }}
     tests:
       - script:
@@ -177,9 +183,8 @@ outputs:
             - cuda.bindings
             - cuda.bindings.driver
             - cuda.bindings.runtime
-            # TODO: add support for v1
-            # - skip: false linux
-              # then: cuda.bindings.cufile
+            - if: linux
+              then: cuda.bindings.cufile
             - cuda.bindings.nvrtc
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
