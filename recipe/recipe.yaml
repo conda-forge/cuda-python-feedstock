@@ -164,6 +164,8 @@ outputs:
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
           - python -c "import cuda.bindings.nvml"
+          - if: linux
+            then: python -c "import cuda.bindings.cufile"
         requirements:
           run:
             - ${{ compiler('c') }}
@@ -183,8 +185,6 @@ outputs:
             - cuda.bindings
             - cuda.bindings.driver
             - cuda.bindings.runtime
-            - if: linux
-              then: cuda.bindings.cufile
             - cuda.bindings.nvrtc
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
