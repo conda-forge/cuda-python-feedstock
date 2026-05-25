@@ -9,7 +9,7 @@ context:
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
-  target_name: ${{ "sbsa-linux" if aarch64 else 'x86_64-linux' if linux else "win64" if win else "" }}
+  target_name: ${{ "sbsa-linux" if aarch64 else 'x86_64-linux' if linux else "x64" if win else "" }}
   subdir: ${{ "targets/" ~ target_name if aarch64 or linux else "Library\\" if win else "" }}
 
 recipe:
