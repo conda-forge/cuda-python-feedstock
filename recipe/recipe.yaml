@@ -22,7 +22,7 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.9") or ppc64le or osx
+  skip: match(python, "<3.10") or ppc64le or osx
 
 outputs:
   - package:
@@ -129,8 +129,7 @@ outputs:
         - ${{ pin_compatible('cuda-nvvm-impl', lower_bound='x', upper_bound='x') }}
         - if: linux
           then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
-        # FIXME: error "following package is not part of the solution: libnvfatbin"
-        # - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
         - libnvjitlink >=13.0,<14.0a0
       ignore_run_exports:
         from_package:
@@ -149,9 +148,6 @@ outputs:
         # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
         # of cuda-cudart-dev and instead allow a looser pinning here.
         - ${{ pin_compatible('cuda-cudart', lower_bound='x', upper_bound='x') }}
-        # Rattler-build views this as circular dependency
-        # TODO: should this be removed outright
-        # - ${{ pin_subpackage('cuda-python', upper_bound='x.x') }}
     tests:
       - script:
           - if: linux
