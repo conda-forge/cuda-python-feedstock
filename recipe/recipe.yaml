@@ -5,7 +5,6 @@ context:
   number: 2
   version: "13.2.0"
   sha256: 6899b7684ccaf3249d521cc092768baeae390780375bb115bcd80350b65b1dff
-  is_freethreading: environ | get("is_freethreading", False)
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
