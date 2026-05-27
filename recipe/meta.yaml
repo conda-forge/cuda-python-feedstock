@@ -1,4 +1,4 @@
-{% set number = 1 %}
+{% set number = 2 %}
 {% set version = "13.2.0" %}
 {% set sha256 = "6899b7684ccaf3249d521cc092768baeae390780375bb115bcd80350b65b1dff" %}
 
@@ -56,7 +56,7 @@ outputs:
         - cuda-version >=13.0,<14.0a0
     test:
       requires:
-        - python >={{ python_min }}
+        - python {{ python_min }}.*
         - numpy
       imports:
         - cuda.bindings
