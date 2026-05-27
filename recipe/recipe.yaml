@@ -10,7 +10,6 @@ context:
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
   target_name: ${{ "sbsa-linux" if aarch64 else 'x86_64-linux' if linux else "x64" if win else "" }}
   subdir: ${{ "targets/" ~ target_name if aarch64 or linux else "Library\\" if win else "" }}
-  touch_is_freethreading: ${{ is_freethreading if is_freethreading is defined else False }}
 
 recipe:
   name: cuda-python-split
