@@ -1,6 +1,6 @@
 {% set number = 1 %}
-{% set version = "13.2.0" %}
-{% set sha256 = "6899b7684ccaf3249d521cc092768baeae390780375bb115bcd80350b65b1dff" %}
+{% set version = "13.3.0" %}
+{% set sha256 = "a6f724e35d2c5087eace5d19ede1f9abdc3cf8b8eb84c4d394a11e08bf21bff4" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
@@ -127,9 +127,10 @@ outputs:
         - python
         - setuptools
         - setuptools-scm >=8
+        - cuda-pathfinder >=1.5.5,<2
       run:
         - python
-        - cuda-pathfinder >=1.1.0,<2
+        - cuda-pathfinder >=1.5.5,<2
         - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}
         # cuda-python requires cuda-nvrtc from the same major version. We ignored
         # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
