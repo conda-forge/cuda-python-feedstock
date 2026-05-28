@@ -1,6 +1,6 @@
 {% set number = 0 %}
-{% set version = "12.9.6" %}
-{% set sha256 = "c48d81e7ee0755c571c82b5c06614b8c4a40e8b5976536a0967705253ae45f48" %}
+{% set version = "12.9.7" %}
+{% set sha256 = "9df6ff7121e11b158730ef39350c111728c9d1a2450124f463f7f4026c89d42f" %}
 
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 {% set bindings_major_version = version.split(".")[0]|int %}
@@ -130,7 +130,7 @@ outputs:
         - setuptools-scm >=8
       run:
         - python
-        - cuda-pathfinder >=1.1.0,<2
+        - cuda-pathfinder >=1.5.5,<2
         - {{ pin_compatible('cuda-version', min_pin='x', max_pin='x') }}  # [not aarch64]
         - cuda-version >=12.0,<12.2a0  # [aarch64 and not cufile_supported]
         - cuda-version >=12.2,<13.0a0  # [aarch64 and cufile_supported]
