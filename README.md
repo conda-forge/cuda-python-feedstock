@@ -274,7 +274,6 @@ Feedstock Maintainers
 =====================
 
 * [@bdice](https://github.com/bdice/)
-* [@cpcloud](https://github.com/cpcloud/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@kkraus14](https://github.com/kkraus14/)
 * [@leofang](https://github.com/leofang/)
