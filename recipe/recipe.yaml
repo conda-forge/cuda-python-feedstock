@@ -29,7 +29,7 @@ outputs:
       version: ${{ version }}
     build:
       number: ${{ number }}
-      skip: not linux64
+      # skip: not linux64
       noarch: python
       script:
         env:
