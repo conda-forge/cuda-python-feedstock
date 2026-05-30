@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 2
+  number: 3
   version: "13.3.0"
   sha256: a6f724e35d2c5087eace5d19ede1f9abdc3cf8b8eb84c4d394a11e08bf21bff4
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -29,7 +29,7 @@ outputs:
       version: ${{ version }}
     build:
       number: ${{ number }}
-      # skip: not linux64
+      skip: not linux64
       noarch: python
       variant:
         # Ensures conda-smithy splits CI jobs per Python version. Without
