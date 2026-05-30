@@ -2,9 +2,9 @@
 schema_version: 1
 
 context:
-  number: 3
-  version: "13.3.0"
-  sha256: a6f724e35d2c5087eace5d19ede1f9abdc3cf8b8eb84c4d394a11e08bf21bff4
+  number: 1
+  version: "13.3.1"
+  sha256: 5d21c94fb373c9dc5c71f922a4356bb0e292b85c1a3c04930a37834f5201a00d
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
@@ -31,12 +31,17 @@ outputs:
       number: ${{ number }}
       skip: not linux64
       noarch: python
+      # Deterministic build string so all variant.use_keys: [python] builds
+      # produce the same artifact filename — required for upload-time dedupe
+      # via hash collision (see `variant.use_keys` note below).
+      string: py_min_${{ python_min | replace(".", "") }}_${{ number }}
       variant:
         # Ensures conda-smithy splits CI jobs per Python version. Without
         # this, the noarch output drops `python` from the intersection of
         # used loop vars (since CFEP-25 uses `python_min`), collapsing all
         # Python variants into a single serialized job. The redundant noarch
-        # builds dedupe on upload via hash collision.
+        # builds dedupe on upload via hash collision (the explicit `string`
+        # above keeps the filename identical across variants).
         use_keys:
           - python
       script:
@@ -53,6 +58,7 @@ outputs:
       run:
         - python >=${{ python_min }}
         - ${{ pin_subpackage('cuda-bindings', upper_bound='x.x') }}
+        - cuda-core >=1.0.0,<1.1.0
         - cuda-version >=13.0,<14.0a0
     tests:
       - script:
@@ -61,9 +67,13 @@ outputs:
           - if: linux
             then: python -c "import cuda.bindings.cufile"
           - python -c "import cuda.bindings.nvml"
+          - if: aarch64
+            then: python -c "import cuda.bindings.cudla"
         requirements:
           run:
-            - python ${{ python_min }}.*
+            # Range (not pinned to python_min) so the test env can use the
+            # variant's Python, matching the locally-built cuda-bindings ABI.
+            - python >=${{ python_min }}
             - numpy
       - python:
           imports:
@@ -120,7 +130,6 @@ outputs:
           then:
           - libcufile
           - libcufile-dev
-        - libnvfatbin
         - cython
         - pip
         - pyclibrary
@@ -139,7 +148,9 @@ outputs:
         - ${{ pin_compatible('cuda-nvvm-impl', lower_bound='x', upper_bound='x') }}
         - if: linux
           then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
-        - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
+        - if: aarch64
+          then: libcudla >=13.0,<14.0a0
+        - libnvfatbin >=13.0,<14.0a0
         - libnvjitlink >=13.0,<14.0a0
       ignore_run_exports:
         from_package:
@@ -164,6 +175,7 @@ outputs:
             then: export C_INCLUDE_PATH="$CONDA_PREFIX/${{ subdir }}/include"
           - if: win
             then: set "CL=%CL% /I%CONDA_PREFIX%\${{ subdir }}\include"
+          # Workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399
           - pip install setuptools
           - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
           - python -c "import test_cimport; test_cimport.test()"
@@ -172,6 +184,8 @@ outputs:
           - python -c "import cuda.bindings.nvml"
           - if: linux
             then: python -c "import cuda.bindings.cufile"
+          - if: aarch64
+            then: python -c "import cuda.bindings.cudla"
         requirements:
           run:
             - ${{ compiler('c') }}
