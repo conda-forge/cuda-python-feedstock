@@ -31,6 +31,14 @@ outputs:
       number: ${{ number }}
       # skip: not linux64
       noarch: python
+      variant:
+        # Ensures conda-smithy splits CI jobs per Python version. Without
+        # this, the noarch output drops `python` from the intersection of
+        # used loop vars (since CFEP-25 uses `python_min`), collapsing all
+        # Python variants into a single serialized job. The redundant noarch
+        # builds dedupe on upload via hash collision.
+        use_keys:
+          - python
       script:
         env:
           SUBDIR: ${{ subdir }}
