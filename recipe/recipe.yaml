@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 0
+  number: 1
   version: "13.3.1"
   sha256: 5d21c94fb373c9dc5c71f922a4356bb0e292b85c1a3c04930a37834f5201a00d
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -31,6 +31,19 @@ outputs:
       number: ${{ number }}
       skip: not linux64
       noarch: python
+      # Deterministic build string so all variant.use_keys: [python] builds
+      # produce the same artifact filename — required for upload-time dedupe
+      # via hash collision (see `variant.use_keys` note below).
+      string: py_min_${{ python_min | replace(".", "") }}_${{ number }}
+      variant:
+        # Ensures conda-smithy splits CI jobs per Python version. Without
+        # this, the noarch output drops `python` from the intersection of
+        # used loop vars (since CFEP-25 uses `python_min`), collapsing all
+        # Python variants into a single serialized job. The redundant noarch
+        # builds dedupe on upload via hash collision (the explicit `string`
+        # above keeps the filename identical across variants).
+        use_keys:
+          - python
       script:
         env:
           SUBDIR: ${{ subdir }}
@@ -58,7 +71,9 @@ outputs:
             then: python -c "import cuda.bindings.cudla"
         requirements:
           run:
-            - python ${{ python_min }}.*
+            # Range (not pinned to python_min) so the test env can use the
+            # variant's Python, matching the locally-built cuda-bindings ABI.
+            - python >=${{ python_min }}
             - numpy
       - python:
           imports:
