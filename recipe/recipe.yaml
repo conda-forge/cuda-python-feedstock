@@ -163,8 +163,8 @@ outputs:
         - if: linux and cufile_supported
           then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
         - if: aarch64
-          then: libcudla >=13.0,<14.0a0
-        - libnvfatbin >=13.0,<14.0a0
+          then: libcudla >=12.0,<13.0a0
+        - libnvfatbin >=12.0,<13.0a0
         - libnvjitlink >=12.3,<13
       ignore_run_exports:
         from_package:
