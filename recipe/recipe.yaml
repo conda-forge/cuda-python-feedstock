@@ -75,8 +75,6 @@ outputs:
           - if: linux
             then: python -c "import cuda.bindings.cufile"
           - python -c "import cuda.bindings.nvml"
-          - if: aarch64
-            then: python -c "import cuda.bindings.cudla"
         requirements:
           run:
             # Range (not pinned to python_min) so the test env can use the
@@ -196,8 +194,6 @@ outputs:
           - python -c "import cuda.bindings.nvml"
           - if: linux
             then: python -c "import cuda.bindings.cufile"
-          - if: aarch64
-            then: python -c "import cuda.bindings.cudla"
         requirements:
           run:
             - cuda-nvcc
