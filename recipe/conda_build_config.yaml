@@ -3,3 +3,8 @@
 cufile_supported:
   - true
   - false  # [aarch64]
+# Allows building cuda-python using cuda-version >=12.0,<12.2a0
+c_compiler_version:            # [aarch64 and not cufile_supported]
+  - 12                         # [aarch64 and not cufile_supported]
+cxx_compiler_version:          # [aarch64 and not cufile_supported]
+  - 12                         # [aarch64 and not cufile_supported]
