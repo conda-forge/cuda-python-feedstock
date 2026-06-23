@@ -11,7 +11,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cufile_supported:
-- 'True'
+- true
 cxx_compiler:
 - gxx
 cxx_compiler_version:
