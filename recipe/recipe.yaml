@@ -12,7 +12,7 @@ context:
   subdir: ${{ "targets/" ~ target_name if aarch64 or linux else "Library\\" if win else "" }}
   # libcufile only exists on ARM for CUDA 12.2+. We split into two ARM packages
   # with/without libcufile support.
-  cufile_supported: aarch64
+  cufile_supported: ${{ cufile_supported }}
 
 recipe:
   name: cuda-python-split

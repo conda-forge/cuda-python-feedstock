@@ -11,7 +11,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cufile_supported:
-- 'True'
+- 'False'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -27,7 +27,7 @@ python:
 python_min:
 - '3.10'
 target_platform:
-- linux-64
+- linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
