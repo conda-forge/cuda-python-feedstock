@@ -161,8 +161,6 @@ outputs:
         - ${{ pin_compatible('cuda-nvcc-impl', lower_bound='x', upper_bound='x') }}
         - if: linux and cufile_supported
           then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
-        - if: not aarch64 or cufile_supported
-          then: libnvfatbin >=12.0,<13.0a0
         - libnvjitlink >=12.3,<13
       ignore_run_exports:
         from_package:
@@ -181,6 +179,11 @@ outputs:
         # version with cuda.cudart.getLocalRuntimeVersion(). We ignored run-exports
         # of cuda-cudart-dev and instead allow a looser pinning here.
         - ${{ pin_compatible('cuda-cudart', lower_bound='x', upper_bound='x') }}
+        # libnvfatbin was first introduced in CTK 12.4. In order to prevent conflicts
+        # when the user tries to install cuda-bindings with older cuda-version packages,
+        # let's make it an optional runtime that pins to cuda-binding's lower and upper
+        # version bounds
+        - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
     tests:
       - script:
           - if: linux
