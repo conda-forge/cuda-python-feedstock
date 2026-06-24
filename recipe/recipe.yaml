@@ -150,13 +150,14 @@ outputs:
         - cuda-pathfinder >=1.5.5,<2
         - if: not aarch64
           then: ${{ pin_compatible('cuda-version', lower_bound='x', upper_bound='x') }}
-        # cuda-python requires cuda-nvrtc from the same major version. We ignored
-        # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
-        # Same for cuda-nvcc-impl.
         - if: aarch64 and not cufile_supported
           then: cuda-version >=12.0,<12.2a0
         - if: aarch64 and cufile_supported
           then: cuda-version >=12.2,<13.0a0
+        # cuda-python requires cuda-nvrtc from the same major version. We ignored
+        # run-exports of cuda-nvrtc-dev and instead allow a looser pinning here.
+        # Same for cuda-nvcc-impl.
+        - ${{ pin_compatible('cuda-nvrtc', lower_bound='x', lower_bound='x') }}
         - ${{ pin_compatible('cuda-nvcc-impl', lower_bound='x', upper_bound='x') }}
         - if: linux and cufile_supported
           then: ${{ pin_compatible('libcufile', lower_bound='x', upper_bound='x') }}
