@@ -197,6 +197,10 @@ outputs:
             then: python -c "import cuda.bindings.cufile"
         requirements:
           run:
+            - if: win
+              then:
+              - ${{ compiler('c') }}
+              - ${{ compiler('cxx') }}
             - cuda-nvcc
             - cuda-nvrtc-dev
             - cuda-profiler-api
