@@ -1,7 +1,3 @@
-azure:
-  free_disk_space: true
-  settings_linux:
-    swapfile_size: 10GiB
 bot:
   abi_migration_branches:
   - '11.8'
@@ -23,3 +19,9 @@ noarch_platforms:
   - linux_64
   - linux_aarch64
   - win_64
+workflow_settings:
+  free_disk_space:
+    - value: "quick"
+      os: win
+    - value: "skip"
+      os: linux
