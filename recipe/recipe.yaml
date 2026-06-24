@@ -145,6 +145,7 @@ outputs:
         - setuptools
         - setuptools-scm >=8
         - cuda-pathfinder >=1.5.5,<2
+        - libnvfatbin
       run:
         - python
         - cuda-pathfinder >=1.5.5,<2
@@ -181,7 +182,7 @@ outputs:
         - ${{ pin_compatible('cuda-cudart', lower_bound='x', upper_bound='x') }}
         # libnvfatbin was first introduced in CTK 12.4. In order to prevent conflicts
         # when the user tries to install cuda-bindings with older cuda-version packages,
-        # let's make it an optional runtime that pins to cuda-binding's lower and upper
+        # let's make it an optional runtime that pins to cuda-bindings' lower and upper
         # version bounds
         - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
     tests:
