@@ -1,7 +1,3 @@
-azure:
-  free_disk_space: true
-  settings_linux:
-    swapfile_size: 10GiB
 bot:
   abi_migration_branches:
   - '11.8'
@@ -10,7 +6,9 @@ build_platform:
   linux_ppc64le: linux_64
 conda_build:
   pkg_format: '2'
+conda_build_tool: rattler-build
 conda_forge_output_validation: true
+conda_install_tool: pixi
 github:
   branch_name: main
   tooling_branch_name: main
@@ -21,3 +19,9 @@ noarch_platforms:
   - linux_64
   - linux_aarch64
   - win_64
+workflow_settings:
+  free_disk_space:
+    - value: "quick"
+      os: win
+    - value: "skip"
+      os: linux

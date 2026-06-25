@@ -7,13 +7,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cufile_supported:
-- 'True'
+- true
 cxx_compiler:
 - vs2022
-is_freethreading:
-- false
-numpy:
-- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -24,6 +20,3 @@ python_min:
 - '3.10'
 target_platform:
 - win-64
-zip_keys:
-- - python
-  - is_freethreading
