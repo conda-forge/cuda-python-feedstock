@@ -2,13 +2,13 @@
 schema_version: 1
 
 context:
-  number: 1
-  version: "13.3.1"
-  sha256: 5d21c94fb373c9dc5c71f922a4356bb0e292b85c1a3c04930a37834f5201a00d
+  number: 0
+  version: "13.4.1"
+  sha256: 0c7bc472dcffc0eedc2973302d9919ce336487ad8078c175c2db115c6330e2fd
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
-  target_name: ${{ "sbsa-linux" if aarch64 else 'x86_64-linux' if linux else "x64" if win else "" }}
+  target_name: ${{ "sbsa-linux" if aarch64 else 'x86_64-linux' if linux else "arm64" if win and arm64 else "x64" if win else "" }}
   subdir: ${{ "targets/" ~ target_name if aarch64 or linux else "Library\\" if win else "" }}
 
 recipe:
@@ -21,7 +21,8 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.10") or ppc64le or osx
+  # conda-forge does not ship CPython builds for win-arm64 until PY314
+  skip: match(python, "<3.10") or ppc64le or osx or (match(python, "<3.14") and win and arm64) 
 
 outputs:
   - package:
@@ -112,9 +113,9 @@ outputs:
         - ${{ stdlib('c') }}
         - if: build_platform != target_platform
           then:
-          - cross-python_${{ target_platform }}
-          - python
-          - cython
+            - cross-python_${{ target_platform }}
+            - python
+            - cython
       host:
         # cuda.bindings needs to be built with the matching major.minor headers
         - cuda-version ==${{ bindings_major_version }}.${{ bindings_minor_version }}
@@ -128,8 +129,8 @@ outputs:
         - cuda-profiler-api
         - if: linux
           then:
-          - libcufile
-          - libcufile-dev
+            - libcufile
+            - libcufile-dev
         - cython
         - pip
         - pyclibrary
@@ -181,7 +182,9 @@ outputs:
           - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
-          - python -c "import cuda.bindings.nvml"
+          # conda-forge does not ship numpy for win-arm64 yet
+          - if: not (win and arm64)
+            then: python -c "import cuda.bindings.nvml"
           - if: linux
             then: python -c "import cuda.bindings.cufile"
           - if: aarch64
@@ -195,7 +198,8 @@ outputs:
             - cuda-profiler-api
             - cython
             - pip
-            - numpy
+            - if: not (win and arm64)
+              then: numpy
         files:
           recipe:
             - test_cimport.pyx
@@ -245,3 +249,4 @@ extra:
     - vzhurba01
     - kkraus14
     - oleksandr-pavlyk
+    - mdboom
