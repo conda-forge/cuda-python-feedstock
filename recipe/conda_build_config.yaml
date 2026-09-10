@@ -1,0 +1,22 @@
+# Local override: keep py310 alive after conda-forge globally dropped it.
+# `python` and `is_python_min` are zipped in the global pinning; we re-declare
+# both here so the zip length matches. `python_min` is lowered to 3.10 so that
+# the CFEP-25 noarch/min-python variant is built against 3.10.
+python:
+  - 3.10.* *_cpython
+  - 3.11.* *_cpython
+  - 3.12.* *_cpython
+  - 3.13.* *_cp313
+  - 3.14.* *_cp314
+  - 3.14.* *_cp314t
+
+is_python_min:
+  - true
+  - false
+  - false
+  - false
+  - false
+  - false
+
+python_min:
+  - "3.10"
