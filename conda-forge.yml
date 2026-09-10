@@ -1,14 +1,9 @@
-azure:
-  free_disk_space: true
-  settings_linux:
-    swapfile_size: 10GiB
 bot:
   abi_migration_branches:
-  - '12.9'
+    - '12.9'
   version_updates:
-    allowed_tag_globs: 'v*'
+    allowed_tag_globs: v*
 build_platform:
-  linux_aarch64: linux_64
   linux_ppc64le: linux_64
 conda_build:
   pkg_format: '2'
@@ -19,9 +14,14 @@ github:
   branch_name: main
   tooling_branch_name: main
 noarch_platforms:
-- linux_64
-- linux_aarch64
-- win_64
+  - linux_64
+  - linux_aarch64
+  - win_64
 provider:
-  linux_aarch64: azure
+  linux_aarch64: default
   linux_ppc64le: azure
+workflow_settings:
+  free_disk_space: quick
+  pagefile_size:
+    - os: linux
+      value: 10
