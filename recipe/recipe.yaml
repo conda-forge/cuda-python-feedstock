@@ -182,9 +182,7 @@ outputs:
           - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
-          # conda-forge does not ship numpy for win-arm64 yet
-          - if: not (win and arm64)
-            then: python -c "import cuda.bindings.nvml"
+          - python -c "import cuda.bindings.nvml"
           - if: linux
             then: python -c "import cuda.bindings.cufile"
           - if: aarch64
@@ -198,8 +196,7 @@ outputs:
             - cuda-profiler-api
             - cython
             - pip
-            - if: not (win and arm64)
-              then: numpy
+            - numpy
         files:
           recipe:
             - test_cimport.pyx
