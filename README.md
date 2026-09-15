@@ -220,13 +220,11 @@ Feedstock Maintainers
 * [@kkraus14](https://github.com/kkraus14/)
 * [@leofang](https://github.com/leofang/)
 * [@m3vaz](https://github.com/m3vaz/)
+* [@mdboom](https://github.com/mdboom/)
 * [@mmccarty](https://github.com/mmccarty/)
 * [@oleksandr-pavlyk](https://github.com/oleksandr-pavlyk/)
 * [@rparolin](https://github.com/rparolin/)
 * [@rwgk](https://github.com/rwgk/)
 * [@vyasr](https://github.com/vyasr/)
 * [@vzhurba01](https://github.com/vzhurba01/)
-
-
-<!-- dummy commit to enable rerendering -->
 
