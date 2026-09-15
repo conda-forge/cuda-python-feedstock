@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 0
+  number: 1
   version: "13.4.1"
   sha256: 0c7bc472dcffc0eedc2973302d9919ce336487ad8078c175c2db115c6330e2fd
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -20,7 +20,7 @@ source:
   sha256: ${{ sha256 }}
 
 build:
-  number: 0
+  number: ${{ number }}
   # conda-forge does not ship CPython builds for win-arm64 until PY314
   skip: match(python, "<3.10") or ppc64le or osx or (match(python, "<3.14") and win and arm64) 
 
@@ -182,9 +182,7 @@ outputs:
           - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
-          # conda-forge does not ship numpy for win-arm64 yet
-          - if: not (win and arm64)
-            then: python -c "import cuda.bindings.nvml"
+          - python -c "import cuda.bindings.nvml"
           - if: linux
             then: python -c "import cuda.bindings.cufile"
           - if: aarch64
@@ -198,8 +196,7 @@ outputs:
             - cuda-profiler-api
             - cython
             - pip
-            - if: not (win and arm64)
-              then: numpy
+            - numpy
         files:
           recipe:
             - test_cimport.pyx
