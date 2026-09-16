@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 1
+  number: 2
   version: "13.4.1"
   sha256: 0c7bc472dcffc0eedc2973302d9919ce336487ad8078c175c2db115c6330e2fd
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -22,7 +22,7 @@ source:
 build:
   number: ${{ number }}
   # conda-forge does not ship CPython builds for win-arm64 until PY314
-  skip: match(python, "<3.10") or ppc64le or osx or (match(python, "<3.14") and win and arm64) 
+  skip: match(python, "<3.10") or ppc64le or osx or (match(python, "<3.14") and win and arm64)
 
 outputs:
   - package:
@@ -59,7 +59,7 @@ outputs:
       run:
         - python >=${{ python_min }}
         - ${{ pin_subpackage('cuda-bindings', upper_bound='x.x') }}
-        - cuda-core >=1.0.0,<1.1.0
+        - cuda-core >=1.2.0,<1.3.0
         - cuda-version >=13.0,<14.0a0
     tests:
       - script:
