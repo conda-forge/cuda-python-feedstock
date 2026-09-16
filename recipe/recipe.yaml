@@ -13,7 +13,7 @@ context:
 
 recipe:
   name: cuda-python-split
-  version: 1
+  version: ${{ version }}
 
 source:
   url: https://github.com/NVIDIA/cuda-python/releases/download/v${{ version }}/cuda-python-v${{ version }}.tar.gz
