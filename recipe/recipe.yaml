@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 2
+  number: 3
   version: "13.4.1"
   sha256: 0c7bc472dcffc0eedc2973302d9919ce336487ad8078c175c2db115c6330e2fd
   bindings_major_version: ${{ (version | split("."))[0] | int }}
