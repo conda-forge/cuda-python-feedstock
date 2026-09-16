@@ -85,7 +85,7 @@ outputs:
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
             - cuda.bindings.nvfatbin
-          pip_check: false
+          pip_check: true
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
       license_file: cuda_python/LICENSE
@@ -210,7 +210,7 @@ outputs:
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
             - cuda.bindings.nvfatbin
-          pip_check: false
+          pip_check: true
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
       license_file: cuda_bindings/LICENSE
