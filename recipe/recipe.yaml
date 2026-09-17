@@ -235,6 +235,7 @@ about:
 extra:
   feedstock-name: cuda-python
   recipe-maintainers:
+    - Andy-Jost
     - rwgk
     - rparolin
     - bdice
