@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 2
+  number: 3
   version: "13.4.1"
   sha256: 0c7bc472dcffc0eedc2973302d9919ce336487ad8078c175c2db115c6330e2fd
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -85,7 +85,7 @@ outputs:
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
             - cuda.bindings.nvfatbin
-          pip_check: false
+          pip_check: true
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
       license_file: cuda_python/LICENSE
@@ -210,7 +210,7 @@ outputs:
             - cuda.bindings.nvjitlink
             - cuda.bindings.nvvm
             - cuda.bindings.nvfatbin
-          pip_check: false
+          pip_check: true
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
       license_file: cuda_bindings/LICENSE
