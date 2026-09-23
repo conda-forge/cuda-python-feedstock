@@ -2,9 +2,9 @@
 schema_version: 1
 
 context:
-  number: 1
-  version: "12.9.7"
-  sha256: 9df6ff7121e11b158730ef39350c111728c9d1a2450124f463f7f4026c89d42f
+  number: 0
+  version: "12.9.9"
+  sha256: 1ef9eb47ec1106c8c618f960ccefa9f547faa401b13ee65547e97f9b74c06233
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
@@ -192,8 +192,13 @@ outputs:
             then: set "CL=%CL% /I%CONDA_PREFIX%\${{ subdir }}\include"
           # Workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399
           - pip install setuptools
-          - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
-          - python -c "import test_cimport; test_cimport.test()"
+          # Building against cuda-bindings 12.9.9 can no longer use older CUDA 12.x headers;
+          # it has never been supported but happened to work until now (with new types like
+          # CUoffset3D/CUgraphDeviceNode added in recent 12.x exposed to Cython).
+          - if: aarch64 and cufile_supported
+            then:
+            - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
+            - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
           - python -c "import cuda.bindings.nvml"
