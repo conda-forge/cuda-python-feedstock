@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   number: 0
-  version: "13.4.2"
-  sha256: b271f2e787212c139e8b867c930ffeab006a00b5eb8e57c9f554889241f849e4
+  version: "13.4.3"
+  sha256: a5d776ed2d81ebf43b1b5d8c00d0e75644779e84c1d13b551cf1af98a049a73a
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
