@@ -3,10 +3,6 @@ About cuda-python-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-python-feedstock/blob/main/LICENSE.txt)
 
-
-About cuda-python
------------------
-
 Home: https://nvidia.github.io/cuda-python/cuda-bindings
 
 Package license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
@@ -19,21 +15,6 @@ Documentation: https://nvidia.github.io/cuda-python/cuda-bindings
 
 CUDA Python provides a standard set of low-level interfaces,
 providing full coverage of and access to the CUDA host APIs from Python.
-
-About cuda-python
------------------
-
-Home: https://nvidia.github.io/cuda-python/
-
-Package license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-
-Summary: CUDA Python
-
-Development: https://github.com/NVIDIA/cuda-python
-
-Documentation: https://nvidia.github.io/cuda-python/
-
-CUDA Python is the home for accessing NVIDIA’s CUDA platform from Python.
 
 Current build status
 ====================
@@ -55,7 +36,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--bindings-green.svg)](https://anaconda.org/conda-forge/cuda-bindings) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-bindings.svg)](https://anaconda.org/conda-forge/cuda-bindings) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-bindings.svg)](https://anaconda.org/conda-forge/cuda-bindings) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-bindings.svg)](https://anaconda.org/conda-forge/cuda-bindings) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--python-green.svg)](https://anaconda.org/conda-forge/cuda-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-python.svg)](https://anaconda.org/conda-forge/cuda-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-python.svg)](https://anaconda.org/conda-forge/cuda-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-python.svg)](https://anaconda.org/conda-forge/cuda-python) |
 
 Installing cuda-python
 ======================
@@ -74,7 +54,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install cuda-bindings cuda-python
+conda install cuda-bindings
 ```
 
 </details>
@@ -83,7 +63,7 @@ conda install cuda-bindings cuda-python
 <summary>With mamba</summary>
 
 ```
-mamba install cuda-bindings cuda-python
+mamba install cuda-bindings
 ```
 
 </details>
@@ -93,9 +73,9 @@ mamba install cuda-bindings cuda-python
 
 ```
 # for adding to your local project
-pixi add cuda-bindings cuda-python
+pixi add cuda-bindings
 # for installing globally
-pixi global install cuda-bindings cuda-python
+pixi global install cuda-bindings
 ```
 
 </details>
@@ -149,6 +129,7 @@ mamba repoquery depends cuda-bindings --channel conda-forge
 </details>
 
 
+
 About conda-forge
 =================
 
@@ -163,9 +144,7 @@ for each of the installable packages. Such a repository is known as a *feedstock
 A feedstock is made up of a conda recipe (the instructions on what and how to build
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
-[Azure](https://azure.microsoft.com/en-us/services/devops/), [GitHub](https://github.com/),
-[CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
-[Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
+[Azure](https://azure.microsoft.com/en-us/services/devops/) and [GitHub](https://github.com/)
 it is possible to build and upload installable packages to the
 [conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
