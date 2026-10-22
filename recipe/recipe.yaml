@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  number: 0
+  number: 1
   version: "12.9.9"
   sha256: 1ef9eb47ec1106c8c618f960ccefa9f547faa401b13ee65547e97f9b74c06233
   bindings_major_version: ${{ (version | split("."))[0] | int }}
@@ -117,9 +117,9 @@ outputs:
         - ${{ stdlib('c') }}
         - if: build_platform != target_platform
           then:
-          - cross-python_${{ target_platform }}
-          - python
-          - cython
+            - cross-python_${{ target_platform }}
+            - python
+            - cython
       host:
         # cuda.bindings needs to be built with the matching major.minor headers
         - cuda-version ==${{ bindings_major_version }}.${{ bindings_minor_version }}
@@ -131,12 +131,12 @@ outputs:
         - cuda-nvrtc
         - cuda-nvrtc-dev
         - cuda-profiler-api
-        - if: linux and cufile_supported
-          then:
-          - libcufile
         - if: linux
           then:
-          - libcufile-dev
+            - if: cufile_supported
+              then:
+                - libcufile
+            - libcufile-dev
         - cython
         - pip
         - pyclibrary
@@ -197,8 +197,8 @@ outputs:
           # CUoffset3D/CUgraphDeviceNode added in recent 12.x exposed to Cython).
           - if: aarch64 and cufile_supported
             then:
-            - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
-            - python -c "import test_cimport; test_cimport.test()"
+              - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
+              - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
           - python -c "import cuda.bindings.nvml"
@@ -208,8 +208,8 @@ outputs:
           run:
             - if: win
               then:
-              - ${{ compiler('c') }}
-              - ${{ compiler('cxx') }}
+                - ${{ compiler('c') }}
+                - ${{ compiler('cxx') }}
             - cuda-nvcc
             - cuda-nvrtc-dev
             - cuda-profiler-api

@@ -12,16 +12,16 @@ conda_install_tool: pixi
 github:
   branch_name: main
   tooling_branch_name: main
+noarch_platforms:
+- linux_64
+- linux_aarch64
+- win_64
 provider:
   linux_aarch64: azure
   linux_ppc64le: azure
-noarch_platforms:
-  - linux_64
-  - linux_aarch64
-  - win_64
 workflow_settings:
   free_disk_space:
-    - value: "quick"
-      os: win
-    - value: "skip"
-      os: linux
+  - os: win
+    value: quick
+  - os: linux
+    value: skip
