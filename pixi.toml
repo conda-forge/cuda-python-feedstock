@@ -5,7 +5,7 @@
 
 [workspace]
 name = "cuda-python-feedstock"
-version = "2026.9.23"  # conda-smithy version used to generate this file
+version = "2026.10.21"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/cuda-python-feedstock"
 authors = ["@conda-forge/cuda-python"]
 channels = ["conda-forge"]
@@ -91,6 +91,15 @@ description = "Debug cuda-python-feedstock with variant linux_64_python3.14.____
 [feature.build.tasks."inspect-linux_64_python3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.14.____cp314t.yaml"
 description = "List contents of cuda-python-feedstock packages built for variant linux_64_python3.14.____cp314t"
+[feature.build.tasks."build-linux_64_python3.15.____cp315"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.15.____cp315.yaml --target-platform linux-64"
+description = "Build cuda-python-feedstock with variant linux_64_python3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."debug-linux_64_python3.15.____cp315"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.15.____cp315.yaml --target-platform linux-64"
+description = "Debug cuda-python-feedstock with variant linux_64_python3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."inspect-linux_64_python3.15.____cp315"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.15.____cp315.yaml"
+description = "List contents of cuda-python-feedstock packages built for variant linux_64_python3.15.____cp315"
 [feature.build.tasks."build-linux_aarch64_cufile_supportedfalsepython3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedfalsepython3.10.____cpython.yaml --target-platform linux-aarch64"
 description = "Build cuda-python-feedstock with variant linux_aarch64_cufile_supportedfalsepython3.10.____cpython directly (without setup scripts)"
@@ -145,6 +154,15 @@ description = "Debug cuda-python-feedstock with variant linux_aarch64_cufile_sup
 [feature.build.tasks."inspect-linux_aarch64_cufile_supportedfalsepython3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cufile_supportedfalsepython3.14.____cp314t.yaml"
 description = "List contents of cuda-python-feedstock packages built for variant linux_aarch64_cufile_supportedfalsepython3.14.____cp314t"
+[feature.build.tasks."build-linux_aarch64_cufile_supportedfalsepython3.15.____cp315"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedfalsepython3.15.____cp315.yaml --target-platform linux-aarch64"
+description = "Build cuda-python-feedstock with variant linux_aarch64_cufile_supportedfalsepython3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."debug-linux_aarch64_cufile_supportedfalsepython3.15.____cp315"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedfalsepython3.15.____cp315.yaml --target-platform linux-aarch64"
+description = "Debug cuda-python-feedstock with variant linux_aarch64_cufile_supportedfalsepython3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."inspect-linux_aarch64_cufile_supportedfalsepython3.15.____cp315"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cufile_supportedfalsepython3.15.____cp315.yaml"
+description = "List contents of cuda-python-feedstock packages built for variant linux_aarch64_cufile_supportedfalsepython3.15.____cp315"
 [feature.build.tasks."build-linux_aarch64_cufile_supportedtruepython3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedtruepython3.10.____cpython.yaml --target-platform linux-aarch64"
 description = "Build cuda-python-feedstock with variant linux_aarch64_cufile_supportedtruepython3.10.____cpython directly (without setup scripts)"
@@ -199,6 +217,15 @@ description = "Debug cuda-python-feedstock with variant linux_aarch64_cufile_sup
 [feature.build.tasks."inspect-linux_aarch64_cufile_supportedtruepython3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cufile_supportedtruepython3.14.____cp314t.yaml"
 description = "List contents of cuda-python-feedstock packages built for variant linux_aarch64_cufile_supportedtruepython3.14.____cp314t"
+[feature.build.tasks."build-linux_aarch64_cufile_supportedtruepython3.15.____cp315"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedtruepython3.15.____cp315.yaml --target-platform linux-aarch64"
+description = "Build cuda-python-feedstock with variant linux_aarch64_cufile_supportedtruepython3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."debug-linux_aarch64_cufile_supportedtruepython3.15.____cp315"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_cufile_supportedtruepython3.15.____cp315.yaml --target-platform linux-aarch64"
+description = "Debug cuda-python-feedstock with variant linux_aarch64_cufile_supportedtruepython3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."inspect-linux_aarch64_cufile_supportedtruepython3.15.____cp315"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cufile_supportedtruepython3.15.____cp315.yaml"
+description = "List contents of cuda-python-feedstock packages built for variant linux_aarch64_cufile_supportedtruepython3.15.____cp315"
 [feature.build.tasks."build-win_64_python3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.10.____cpython.yaml --target-platform win-64"
 description = "Build cuda-python-feedstock with variant win_64_python3.10.____cpython directly (without setup scripts)"
@@ -253,6 +280,15 @@ description = "Debug cuda-python-feedstock with variant win_64_python3.14.____cp
 [feature.build.tasks."inspect-win_64_python3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.14.____cp314t.yaml"
 description = "List contents of cuda-python-feedstock packages built for variant win_64_python3.14.____cp314t"
+[feature.build.tasks."build-win_64_python3.15.____cp315"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_python3.15.____cp315.yaml --target-platform win-64"
+description = "Build cuda-python-feedstock with variant win_64_python3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."debug-win_64_python3.15.____cp315"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/win_64_python3.15.____cp315.yaml --target-platform win-64"
+description = "Debug cuda-python-feedstock with variant win_64_python3.15.____cp315 directly (without setup scripts)"
+[feature.build.tasks."inspect-win_64_python3.15.____cp315"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_python3.15.____cp315.yaml"
+description = "List contents of cuda-python-feedstock packages built for variant win_64_python3.15.____cp315"
 
 [environments]
 build = ["build"]
