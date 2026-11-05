@@ -22,7 +22,7 @@ source:
 build:
   number: ${{ number }}
   # conda-forge does not ship CPython builds for win-arm64 until PY314
-  skip: match(python, "<3.10") or ppc64le or osx or (match(python, "<3.14") and win and arm64)
+  skip: match(python, "<3.11") or ppc64le or osx or (match(python, "<3.14") and win and arm64)
 
 outputs:
   - package:
