@@ -214,7 +214,7 @@ outputs:
           pip_check: true
     about:
       license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-      license_file: cuda_bindings/LICENSE
+      license_file: cuda_bindings_13/LICENSE
       summary: CUDA Python Low-level Bindings
       description: |
         CUDA Python provides a standard set of low-level interfaces,
