@@ -1,0 +1,39 @@
+migrator_ts: 1755739491
+__migrator:
+    commit_message: Rebuild for python 3.15 freethreading
+    migration_number: 1
+    operation: key_add
+    primary_key: python
+    use_local: true
+    ordering:
+        python:
+            - 3.9.* *_cpython
+            - 3.10.* *_cpython
+            - 3.11.* *_cpython
+            - 3.12.* *_cpython
+            - 3.13.* *_cp313
+            - 3.13.* *_cp313t
+            - 3.14.* *_cp314
+            - 3.14.* *_cp314t
+            - 3.15.* *_cp315
+            - 3.15.* *_cp315t  # new entry
+    paused: false
+    longterm: true
+    pr_limit: 5
+    exclude:
+        - python
+        - pypy3.6
+        - pypy-meta
+        - cross-python
+        - python_abi
+    exclude_pinned_pkgs: false
+
+python:
+- 3.15.* *_cp315t
+# additional entries to add for zip_keys
+is_freethreading:
+- true
+is_python_min:
+- false
+is_abi3:
+- false
