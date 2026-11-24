@@ -210,7 +210,10 @@ outputs:
               then:
                 - ${{ compiler('c') }}
                 - ${{ compiler('cxx') }}
-            - cuda-nvcc
+            # The compile test runs on Linux. On Windows, CUDA 12's
+            # cuda-nvcc wrapper requires VS 2019, conflicting with VS 2022.
+            - if: linux
+              then: cuda-nvcc
             - cuda-nvrtc-dev
             - cuda-profiler-api
             - cython >=3.2,<3.3
