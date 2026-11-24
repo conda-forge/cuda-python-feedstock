@@ -9,7 +9,7 @@ About cuda-python
 
 Home: https://nvidia.github.io/cuda-python/cuda-bindings
 
-Package license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+Package license: Apache-2.0
 
 Summary: CUDA Python Low-level Bindings
 
@@ -25,7 +25,7 @@ About cuda-python
 
 Home: https://nvidia.github.io/cuda-python/
 
-Package license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+Package license: Apache-2.0
 
 Summary: CUDA Python
 
