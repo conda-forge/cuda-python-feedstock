@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   number: 0
-  version: "12.9.10"
-  sha256: 9f98ce2d6a671df9053a5b0b8689a8456ec1d300d1b6fbd9c498347309c74f72
+  version: "12.9.11"
+  sha256: 1e767e3798b3493eeddaefadf2b018c8b06e7fb6b35091e8880327fb5bf91358
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
@@ -24,7 +24,7 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.10") or ppc64le or osx
+  skip: match(python, "<3.11") or ppc64le or osx
 
 outputs:
   - package:
@@ -49,6 +49,7 @@ outputs:
           - python
       script:
         env:
+          CUDA_PYTHON_BUILD_MAJOR: "12"
           SUBDIR: ${{ subdir }}
           TARGET_NAME: ${{ target_name }}
         file: ${{ 'build_output.bat' if win else 'build_output.sh' if linux else '' }}
@@ -57,7 +58,7 @@ outputs:
         - python ${{ python_min }}.*
         - pip
         - setuptools >=80
-        - setuptools-scm >=8
+        - setuptools-scm >=8,!=10.1
       run:
         - python >=${{ python_min }}
         - ${{ pin_subpackage('cuda-bindings', upper_bound='x.x') }}
@@ -119,7 +120,7 @@ outputs:
           then:
             - cross-python_${{ target_platform }}
             - python
-            - cython >=3.2,<3.3
+            - cython >=3.2.5,<3.3
       host:
         # cuda.bindings needs to be built with the matching major.minor headers
         - cuda-version ==${{ bindings_major_version }}.${{ bindings_minor_version }}
@@ -137,12 +138,11 @@ outputs:
               then:
                 - libcufile
             - libcufile-dev
-        - cython >=3.2,<3.3
+        - cython >=3.2.5,<3.3
         - pip
-        - pyclibrary >=0.1.7
         - python
         - setuptools >=80
-        - setuptools-scm >=8
+        - setuptools-scm >=8,!=10.1
         - cuda-pathfinder >=1.5.5,<2
         - libnvfatbin
       run:
@@ -221,7 +221,7 @@ outputs:
               - cuda-crt-dev_${{ target_platform }}
               - cuda-cudart-dev
               - cuda-nvrtc-dev
-              - cython >=3.2,<3.3
+              - cython >=3.2.5,<3.3
               - pip
           files:
             recipe:
@@ -241,7 +241,7 @@ outputs:
           pip_check: false
     about:
       license: Apache-2.0
-      license_file: cuda_bindings/LICENSE
+      license_file: cuda_bindings_12/LICENSE
       summary: CUDA Python Low-level Bindings
       description: |
         CUDA Python provides a standard set of low-level interfaces,
