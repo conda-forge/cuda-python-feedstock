@@ -2,11 +2,10 @@
 
 export CUDA_HOME="${PREFIX}/${SUBDIR}"
 
-DIR_NAME="$(echo $PKG_NAME | tr '-' '_')"
-cd $DIR_NAME
-if [[ ${DIR_NAME} == "cuda_python" || ${DIR_NAME} == "cuda_bindings" ]]; then
-  # The upstream setup.py calls get_version() without dist_name,
-  # so only the generic SETUPTOOLS_SCM_PRETEND_VERSION is honored.
-  export SETUPTOOLS_SCM_PRETEND_VERSION=${PKG_VERSION}
+DIR_NAME="${PKG_NAME//-/_}"
+if [[ "$PKG_NAME" == "cuda-bindings" ]]; then
+    DIR_NAME=cuda_bindings_12
 fi
-$PYTHON -m pip install . --no-deps -vv
+cd "$DIR_NAME" || exit 1
+export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
+"$PYTHON" -m pip install . --no-deps -vv
