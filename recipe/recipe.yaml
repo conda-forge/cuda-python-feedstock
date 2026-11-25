@@ -2,9 +2,9 @@
 schema_version: 1
 
 context:
-  number: 1
-  version: "12.9.9"
-  sha256: 1ef9eb47ec1106c8c618f960ccefa9f547faa401b13ee65547e97f9b74c06233
+  number: 0
+  version: "12.9.10"
+  sha256: 9f98ce2d6a671df9053a5b0b8689a8456ec1d300d1b6fbd9c498347309c74f72
   bindings_major_version: ${{ (version | split("."))[0] | int }}
   bindings_minor_version: ${{ (version | split("."))[1] | int }}
   bindings_patch_version: ${{ (version | split("."))[2] | int }}
@@ -56,7 +56,7 @@ outputs:
       host:
         - python ${{ python_min }}.*
         - pip
-        - setuptools
+        - setuptools >=80
         - setuptools-scm >=8
       run:
         - python >=${{ python_min }}
@@ -91,7 +91,7 @@ outputs:
             - cuda.bindings.nvfatbin
           pip_check: false
     about:
-      license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+      license: Apache-2.0
       license_file: cuda_python/LICENSE
       summary: CUDA Python
       description: |
@@ -119,7 +119,7 @@ outputs:
           then:
             - cross-python_${{ target_platform }}
             - python
-            - cython
+            - cython >=3.2,<3.3
       host:
         # cuda.bindings needs to be built with the matching major.minor headers
         - cuda-version ==${{ bindings_major_version }}.${{ bindings_minor_version }}
@@ -137,11 +137,11 @@ outputs:
               then:
                 - libcufile
             - libcufile-dev
-        - cython
+        - cython >=3.2,<3.3
         - pip
-        - pyclibrary
+        - pyclibrary >=0.1.7
         - python
-        - setuptools
+        - setuptools >=80
         - setuptools-scm >=8
         - cuda-pathfinder >=1.5.5,<2
         - libnvfatbin
@@ -186,19 +186,6 @@ outputs:
         - ${{ pin_compatible('libnvfatbin', lower_bound='x', upper_bound='x') }}
     tests:
       - script:
-          - if: linux
-            then: export C_INCLUDE_PATH="$CONDA_PREFIX/${{ subdir }}/include"
-          - if: win
-            then: set "CL=%CL% /I%CONDA_PREFIX%\${{ subdir }}\include"
-          # Workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399
-          - pip install setuptools
-          # Building against cuda-bindings 12.9.9 can no longer use older CUDA 12.x headers;
-          # it has never been supported but happened to work until now (with new types like
-          # CUoffset3D/CUgraphDeviceNode added in recent 12.x exposed to Cython).
-          - if: aarch64 and cufile_supported
-            then:
-              - cythonize -i -3 -Xfreethreading_compatible=True *.pyx
-              - python -c "import test_cimport; test_cimport.test()"
           - python -c "import cuda.bindings; print(cuda.bindings.__version__)"
           # Imports depend on numpy
           - python -c "import cuda.bindings.nvml"
@@ -206,19 +193,39 @@ outputs:
             then: python -c "import cuda.bindings.cufile"
         requirements:
           run:
-            - if: win
-              then:
-                - ${{ compiler('c') }}
-                - ${{ compiler('cxx') }}
-            - cuda-nvcc
-            - cuda-nvrtc-dev
-            - cuda-profiler-api
-            - cython
-            - pip
             - numpy
-        files:
-          recipe:
-            - test_cimport.pyx
+      # The Arm64 build without cuFile requires CUDA 12.0-12.1 at runtime.
+      - if: not (linux and aarch64 and not cufile_supported)
+        then:
+          script:
+            - if: linux
+              then: |
+                export CPATH="$CONDA_PREFIX/${{ subdir }}/include${CPATH:+:$CPATH}"
+                export CXXFLAGS="$CXXFLAGS -std=c++17"
+            - if: win
+              then: set CL=%CL% /I"%CONDA_PREFIX%\Library\include" /std:c++17
+            # Workaround for https://github.com/conda-forge/setuptools-feedstock/issues/399
+            - pip install setuptools
+            - cythonize -i -3 -Xfreethreading_compatible=True test_cimport.pyx
+            - python -c "import test_cimport; test_cimport.test()"
+          requirements:
+            run:
+              # CUDA 12.9's cuda-nvcc-impl constrains GCC below 15.
+              - if: linux
+                then:
+                  - gcc_${{ target_platform }} 14.*
+                  - gxx_${{ target_platform }} 14.*
+              - if: win
+                then: ${{ compiler('cxx') }}
+              - cuda-version ==${{ bindings_major_version }}.${{ bindings_minor_version }}
+              - cuda-crt-dev_${{ target_platform }}
+              - cuda-cudart-dev
+              - cuda-nvrtc-dev
+              - cython >=3.2,<3.3
+              - pip
+          files:
+            recipe:
+              - test_cimport.pyx
       - python:
           imports:
             - cuda
@@ -233,7 +240,7 @@ outputs:
             - cuda.bindings.nvfatbin
           pip_check: false
     about:
-      license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
+      license: Apache-2.0
       license_file: cuda_bindings/LICENSE
       summary: CUDA Python Low-level Bindings
       description: |
@@ -244,8 +251,8 @@ outputs:
       documentation: https://nvidia.github.io/cuda-python/cuda-bindings
 
 about:
-  license: LicenseRef-NVIDIA-SOFTWARE-LICENSE
-  license_file: LICENSE.md
+  license: Apache-2.0
+  license_file: LICENSE
   summary: CUDA Python
   description: |
     CUDA Python is the home for accessing NVIDIA's CUDA platform from Python.
